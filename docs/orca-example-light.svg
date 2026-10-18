@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 800" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#59636e"/></marker>
+<marker id="d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#818b98"/></marker>
+</defs>
+<line x1="120" y1="88" x2="120" y2="780" stroke="#d1d9e0" stroke-width="1.5" stroke-dasharray="2 6"/>
+<rect x="35" y="24" width="170" height="64" rx="10" fill="#ffffff" stroke="#59636e" stroke-width="1.6"/>
+<text x="120" y="54" text-anchor="middle" font-size="16" font-weight="650" fill="#1f2328">User</text>
+<text x="120" y="74" text-anchor="middle" font-size="13" fill="#59636e">client app</text>
+<line x1="320" y1="88" x2="320" y2="780" stroke="#d1d9e0" stroke-width="1.5" stroke-dasharray="2 6"/>
+<rect x="235" y="24" width="170" height="64" rx="10" fill="#ffffff" stroke="#59636e" stroke-width="1.6"/>
+<text x="320" y="54" text-anchor="middle" font-size="16" font-weight="650" fill="#1f2328">Write queue</text>
+<text x="320" y="74" text-anchor="middle" font-size="13" fill="#59636e">+ leases</text>
+<line x1="520" y1="88" x2="520" y2="780" stroke="#d1d9e0" stroke-width="1.5" stroke-dasharray="2 6"/>
+<rect x="435" y="24" width="170" height="64" rx="10" fill="#ffffff" stroke="#59636e" stroke-width="1.6"/>
+<text x="520" y="62" text-anchor="middle" font-size="16" font-weight="650" fill="#1f2328">Vendor API</text>
+<line x1="720" y1="88" x2="720" y2="780" stroke="#d1d9e0" stroke-width="1.5" stroke-dasharray="2 6"/>
+<rect x="635" y="24" width="170" height="64" rx="10" fill="#ffffff" stroke="#59636e" stroke-width="1.6"/>
+<text x="720" y="62" text-anchor="middle" font-size="16" font-weight="650" fill="#1f2328">Source database</text>
+<line x1="920" y1="88" x2="920" y2="780" stroke="#d1d9e0" stroke-width="1.5" stroke-dasharray="2 6"/>
+<rect x="835" y="24" width="170" height="64" rx="10" fill="#ddf4ff" stroke="#0969da" stroke-width="1.6"/>
+<text x="920" y="54" text-anchor="middle" font-size="16" font-weight="650" fill="#1f2328">Change capture</text>
+<text x="920" y="74" text-anchor="middle" font-size="13" fill="#59636e">hints only</text>
+<line x1="1120" y1="88" x2="1120" y2="780" stroke="#d1d9e0" stroke-width="1.5" stroke-dasharray="2 6"/>
+<rect x="1035" y="24" width="170" height="64" rx="10" fill="#ddf4ff" stroke="#0969da" stroke-width="1.6"/>
+<text x="1120" y="54" text-anchor="middle" font-size="16" font-weight="650" fill="#1f2328">Store</text>
+<text x="1120" y="74" text-anchor="middle" font-size="13" fill="#59636e">+ read models</text>
+<path d="M132,140 h44 v22 h-40" fill="none" stroke="#59636e" stroke-width="1.6" marker-end="url(#a)"/>
+<text x="184" y="156" text-anchor="start" font-size="13.5" fill="#1f2328">record intent, show it at once</text>
+<circle cx="120" cy="140" r="11" fill="#f6f8fa" stroke="#d1d9e0"/><text x="120" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="#59636e">1</text>
+<line x1="133" y1="202" x2="316" y2="202" stroke="#59636e" stroke-width="1.6" marker-end="url(#a)"/>
+<text x="220.0" y="194" text-anchor="middle" font-size="13.5" fill="#1f2328">enqueue (lease checked)</text>
+<circle cx="120" cy="202" r="11" fill="#f6f8fa" stroke="#d1d9e0"/><text x="120" y="206" text-anchor="middle" font-size="11" font-weight="700" fill="#59636e">2</text>
+<line x1="333" y1="264" x2="516" y2="264" stroke="#59636e" stroke-width="1.6" marker-end="url(#a)"/>
+<text x="420.0" y="256" text-anchor="middle" font-size="13.5" fill="#1f2328">send (lease checked again)</text>
+<circle cx="320" cy="264" r="11" fill="#f6f8fa" stroke="#d1d9e0"/><text x="320" y="268" text-anchor="middle" font-size="11" font-weight="700" fill="#59636e">3</text>
+<line x1="533" y1="326" x2="716" y2="326" stroke="#59636e" stroke-width="1.6" marker-end="url(#a)"/>
+<text x="620.0" y="318" text-anchor="middle" font-size="13.5" fill="#1f2328">update order 42</text>
+<circle cx="520" cy="326" r="11" fill="#f6f8fa" stroke="#d1d9e0"/><text x="520" y="330" text-anchor="middle" font-size="11" font-weight="700" fill="#59636e">4</text>
+<line x1="733" y1="388" x2="916" y2="388" stroke="#818b98" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#d)"/>
+<text x="820.0" y="380" text-anchor="middle" font-size="13.5" fill="#1f2328">statement completed</text>
+<circle cx="720" cy="388" r="11" fill="#f6f8fa" stroke="#d1d9e0"/><text x="720" y="392" text-anchor="middle" font-size="11" font-weight="700" fill="#59636e">5</text>
+<line x1="933" y1="450" x2="1116" y2="450" stroke="#818b98" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#d)"/>
+<text x="1020.0" y="442" text-anchor="middle" font-size="13.5" fill="#1f2328">hint: orders, key 42</text>
+<circle cx="920" cy="450" r="11" fill="#f6f8fa" stroke="#d1d9e0"/><text x="920" y="454" text-anchor="middle" font-size="11" font-weight="700" fill="#59636e">6</text>
+<line x1="1107" y1="512" x2="724" y2="512" stroke="#59636e" stroke-width="1.6" marker-end="url(#a)"/>
+<text x="920.0" y="504" text-anchor="middle" font-size="13.5" fill="#1f2328">re-read order 42, committed only</text>
+<circle cx="1120" cy="512" r="11" fill="#f6f8fa" stroke="#d1d9e0"/><text x="1120" y="516" text-anchor="middle" font-size="11" font-weight="700" fill="#59636e">7</text>
+<path d="M1132,574 h44 v22 h-40" fill="none" stroke="#59636e" stroke-width="1.6" marker-end="url(#a)"/>
+<text x="1100" y="590" text-anchor="end" font-size="13.5" fill="#1f2328">rebuild read models, version 1001</text>
+<circle cx="1120" cy="574" r="11" fill="#f6f8fa" stroke="#d1d9e0"/><text x="1120" y="578" text-anchor="middle" font-size="11" font-weight="700" fill="#59636e">8</text>
+<line x1="1107" y1="636" x2="124" y2="636" stroke="#818b98" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#d)"/>
+<text x="620.0" y="628" text-anchor="middle" font-size="13.5" fill="#1f2328">version 1001, delivered whole</text>
+<circle cx="1120" cy="636" r="11" fill="#f6f8fa" stroke="#d1d9e0"/><text x="1120" y="640" text-anchor="middle" font-size="11" font-weight="700" fill="#59636e">9</text>
+<path d="M132,698 h44 v22 h-40" fill="none" stroke="#59636e" stroke-width="1.6" marker-end="url(#a)"/>
+<text x="184" y="714" text-anchor="start" font-size="13.5" fill="#1f2328">intent judged: state reached</text>
+<circle cx="120" cy="698" r="11" fill="#f6f8fa" stroke="#d1d9e0"/><text x="120" y="702" text-anchor="middle" font-size="11" font-weight="700" fill="#59636e">10</text>
+</svg>

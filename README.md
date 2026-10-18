@@ -142,25 +142,10 @@ Nothing writes to the vendor's database directly. Every write goes through the v
 
 One order, followed through the system. "Order 42" is any record in the vendor's database.
 
-```mermaid
-sequenceDiagram
-    participant U as User (client app)
-    participant Q as Write queue
-    participant API as Vendor API
-    participant DB as Source database
-    participant CAP as Change capture
-    participant S as Store + read models
-    U->>U: record intent "set order 42 status", show it at once
-    U->>Q: enqueue (lease token checked)
-    Q->>API: send (lease token checked again)
-    API->>DB: update order 42
-    DB-->>CAP: statement completed
-    CAP-->>S: hint: orders, key 42
-    S->>DB: re-read order 42, committed only
-    S->>S: raw row changed, rebuild order 42's read models, version 1001
-    S-->>U: version 1001 delivered
-    U->>U: intent judged: state reached, pending overlay removed
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/orca-example-dark.svg">
+  <img alt="One order through ORCA, from the user's intent to version 1001 delivered and the intent judged" src="docs/orca-example-light.svg">
+</picture>
 
 **The ordinary path.** The user sees the change at once, from their own intent log. The vendor's API applies it.
 Capture says only "orders, key 42". The store re-reads that one row with a committed-only read, rebuilds the read
