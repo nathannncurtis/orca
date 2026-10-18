@@ -28,35 +28,7 @@ ORCA is the shape that remains: own a translated, live copy for reads, and send 
 
 ## At a glance
 
-```mermaid
-flowchart LR
-    subgraph V["Vendor system (not yours)"]
-        DB[(Source database)]
-        API[Vendor API]
-    end
-
-    subgraph P["Your platform"]
-        CAP[Change capture<br/>hints: table + keys]
-        STORE[(Operational store<br/>raw copy)]
-        ACL[Anti-corruption layer<br/>translation library]
-        RM[(Read models<br/>versioned + outbox)]
-        Q[(Write queue<br/>+ leases)]
-        FAN[Delivery<br/>fan-out]
-    end
-
-    subgraph C["Clients"]
-        APP[Client app<br/>local cache + intent log]
-    end
-
-    DB -- "trace of writes" --> CAP
-    CAP -- "hint stream<br/>resumable, gaps flagged" --> STORE
-    STORE -- "re-read by key<br/>committed only" --> DB
-    STORE -. "checksum sweeps" .-> DB
-    STORE --> ACL --> RM
-    RM -- "whole versions,<br/>commit order" --> FAN --> APP
-    APP -- "intents" --> Q -- "one claimer" --> API --> DB
-    APP -. "fallback: one record,<br/>same library" .-> DB
-```
+![ORCA at a glance: vendor system, your platform, clients](docs/orca-overview.svg)
 
 Reads flow left to right and never touch the vendor except through re-reads, sweeps and a narrow fallback. Writes
 flow through the vendor's own API and are judged by what change capture brings back.
