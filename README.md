@@ -28,7 +28,10 @@ ORCA is the shape that remains: own a translated, live copy for reads, and send 
 
 ## At a glance
 
-![ORCA at a glance: vendor system, your platform, clients](docs/orca-overview.svg)
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/orca-overview-dark.svg">
+  <img alt="ORCA at a glance: vendor system, your platform, clients" src="docs/orca-overview-light.svg">
+</picture>
 
 Reads flow left to right and never touch the vendor except through re-reads, sweeps and a narrow fallback. Writes
 flow through the vendor's own API and are judged by what change capture brings back.
