@@ -26,6 +26,41 @@ The usual answers do not fit:
 
 ORCA is the shape that remains: own a translated, live copy for reads, and send every write back through the vendor.
 
+## At a glance
+
+```mermaid
+flowchart LR
+    subgraph V["Vendor system (not yours)"]
+        DB[(Source database)]
+        API[Vendor API]
+    end
+
+    subgraph P["Your platform"]
+        CAP[Change capture<br/>hints: table + keys]
+        STORE[(Operational store<br/>raw copy)]
+        ACL[Anti-corruption layer<br/>translation library]
+        RM[(Read models<br/>versioned + outbox)]
+        Q[(Write queue<br/>+ leases)]
+        FAN[Delivery<br/>fan-out]
+    end
+
+    subgraph C["Clients"]
+        APP[Client app<br/>local cache + intent log]
+    end
+
+    DB -- "trace of writes" --> CAP
+    CAP -- "hint stream<br/>resumable, gaps flagged" --> STORE
+    STORE -- "re-read by key<br/>committed only" --> DB
+    STORE -. "checksum sweeps" .-> DB
+    STORE --> ACL --> RM
+    RM -- "whole versions,<br/>commit order" --> FAN --> APP
+    APP -- "intents" --> Q -- "one claimer" --> API --> DB
+    APP -. "fallback: one record,<br/>same library" .-> DB
+```
+
+Reads flow left to right and never touch the vendor except through re-reads, sweeps and a narrow fallback. Writes
+flow through the vendor's own API and are judged by what change capture brings back.
+
 ## The four parts
 
 ### Change capture
@@ -127,6 +162,70 @@ Nothing writes to the vendor's database directly. Every write goes through the v
 | A client reconnects after its position has expired | Full resync of its read models, not a replay |
 | The platform is down | Clients fall back narrowly to the source, visibly |
 | The vendor changes its schema | The raw layer shows it; translations are rebuilt from the raw layer |
+
+## A worked example
+
+One order, followed through the system. "Order 42" is any record in the vendor's database.
+
+```mermaid
+sequenceDiagram
+    participant U as User (client app)
+    participant Q as Write queue
+    participant API as Vendor API
+    participant DB as Source database
+    participant CAP as Change capture
+    participant S as Store + read models
+    U->>U: record intent "set order 42 status", show it at once
+    U->>Q: enqueue (lease token checked)
+    Q->>API: send (lease token checked again)
+    API->>DB: update order 42
+    DB-->>CAP: statement completed
+    CAP-->>S: hint: orders, key 42
+    S->>DB: re-read order 42, committed only
+    S->>S: raw row changed, rebuild order 42's read models, version 1001
+    S-->>U: version 1001 delivered
+    U->>U: intent judged: state reached, pending overlay removed
+```
+
+**The ordinary path.** The user sees the change at once, from their own intent log. The vendor's API applies it.
+Capture says only "orders, key 42". The store re-reads that one row with a committed-only read, rebuilds the read
+models for order 42 in one transaction that takes version 1001 and writes it to the outbox, and every client receives
+version 1001 as a whole. The intent compares what came back with what it sent: the values match and arrived after the
+intent was sent, so it is judged "state reached". For a create, the API's returned ID would make it "confirmed".
+
+**The same order, when things go wrong:**
+
+- **Capture loses the event.** Nothing arrives for order 42. The intent waits; after its timeout the store re-reads
+  order 42 directly, and the next checksum sweep would find the range anyway. The intent then resolves on what it
+  sees, never by sending again.
+- **The change rolls back.** Capture still reports "orders, key 42", because the statement ran. The committed-only
+  re-read returns the old values, nothing changes, and no version is issued. The intent sees its values never
+  arrived and ends "undetermined", shown to the user.
+- **The sending worker crashes after the API call.** Another worker claims the intent. Its outcome is uncertain, so it
+  checks the store before doing anything. Order 42 already shows the change, so the intent is judged on that, and the
+  vendor is never called twice.
+- **Someone edits order 42 in the vendor's own application at the same moment.** Their change arrives through
+  capture like any other. If it set the same values, the intent can only say "state reached", because nothing proves
+  which request caused it. If it set different values, the intent ends "undetermined" and the user sees the conflict.
+- **A client was offline overnight.** It reconnects from its last version. If the outbox still holds everything after
+  that version, it receives whole versions in order; if not, it resynchronizes its read models instead of replaying.
+
+## Related patterns
+
+ORCA is assembled from known ideas. What it adds is how they are held together when the source is someone else's.
+
+| Pattern | What ORCA takes | What ORCA changes |
+|---|---|---|
+| Change data capture (CDC) | A stream of what changed, consumed from a position | Capture is only a hint; truth comes from a committed-only re-read, and gaps are expected and reconciled. No log access or schema change is needed. |
+| Operational data store | A live, current copy for reads | A raw layer kept exactly as the source, so translations rebuild without touching the vendor |
+| Anti-corruption layer (domain-driven design) | Translate the outside model at the boundary | The translator is a library with no I/O, shared by the store and by clients' direct-to-source fallback, so the vendor's model has one home |
+| CQRS read models | Read-shaped data, separate from where writes go | Writes don't go to your store at all: they go through the vendor's API and are judged by what comes back |
+| Transactional outbox | Durable record of changes, written with the data | Versions are in commit order through a counter row, and delivered as whole groups so a consumer cannot skip part of one |
+| Idempotent receivers / exactly-once | Avoiding duplicate effects | Replaced by honesty: one claimer, never resend blind, and three outcomes (confirmed, state reached, undetermined) |
+| Leases with fencing tokens | Coordinating concurrent writers | Checked at enqueue and before send; explicitly not a guarantee against requests already in flight or people in the vendor's own application |
+
+The combination is the point. A CDC pipeline usually assumes trustworthy capture and owned targets. CQRS usually
+assumes you own the write side. ORCA assumes neither, and says exactly which guarantees survive.
 
 ## When ORCA fits
 
