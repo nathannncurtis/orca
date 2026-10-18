@@ -143,8 +143,8 @@ Nothing writes to the vendor's database directly. Every write goes through the v
 One order, followed through the system. "Order 42" is any record in the vendor's database.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/orca-example-dark.svg">
-  <img alt="One order through ORCA, from the user's intent to version 1001 delivered and the intent judged" src="docs/orca-example-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/example-ordinary-dark.svg">
+  <img alt="One order through ORCA, from the user's intent to version 1001 delivered and the intent judged" src="docs/example-ordinary-light.svg">
 </picture>
 
 **The ordinary path.** The user sees the change at once, from their own intent log. The vendor's API applies it.
@@ -158,17 +158,47 @@ intent was sent, so it is judged "state reached". For a create, the API's return
 - **Capture loses the event.** Nothing arrives for order 42. The intent waits; after its timeout the store re-reads
   order 42 directly, and the next checksum sweep would find the range anyway. The intent then resolves on what it
   sees, never by sending again.
+
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/example-lost-event-dark.svg">
+    <img alt="A lost capture event, resolved by the intent's own re-read" src="docs/example-lost-event-light.svg">
+  </picture>
+
 - **The change rolls back.** Capture still reports "orders, key 42", because the statement ran. The committed-only
   re-read returns the old values, nothing changes, and no version is issued. The intent sees its values never
   arrived and ends "undetermined", shown to the user.
+
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/example-rollback-dark.svg">
+    <img alt="A rolled-back change, seen as unchanged by the committed-only re-read" src="docs/example-rollback-light.svg">
+  </picture>
+
 - **The sending worker crashes after the API call.** Another worker claims the intent. Its outcome is uncertain, so it
   checks the store before doing anything. Order 42 already shows the change, so the intent is judged on that, and the
   vendor is never called twice.
+
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/example-crashed-sender-dark.svg">
+    <img alt="A worker crash after sending, resolved by checking the store before acting" src="docs/example-crashed-sender-light.svg">
+  </picture>
+
 - **Someone edits order 42 in the vendor's own application at the same moment.** Their change arrives through
   capture like any other. If it set the same values, the intent can only say "state reached", because nothing proves
   which request caused it. If it set different values, the intent ends "undetermined" and the user sees the conflict.
+
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/example-concurrent-edit-dark.svg">
+    <img alt="A concurrent edit in the vendor's own application" src="docs/example-concurrent-edit-light.svg">
+  </picture>
+
 - **A client was offline overnight.** It reconnects from its last version. If the outbox still holds everything after
   that version, it receives whole versions in order; if not, it resynchronizes its read models instead of replaying.
+
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/example-offline-client-dark.svg">
+    <img alt="An offline client resuming from its last version, or resyncing" src="docs/example-offline-client-light.svg">
+  </picture>
+
 
 ## Related patterns
 
