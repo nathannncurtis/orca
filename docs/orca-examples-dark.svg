@@ -1,0 +1,206 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 3200" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif">
+<text x="20" y="42" font-size="19" font-weight="700" fill="#f0f6fc">1. The ordinary path</text>
+<line x1="34" y1="91.0" x2="34" y2="635.0" stroke="#3d444d" stroke-width="2"/>
+<rect x="64" y="62" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="84" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">USER</text>
+<text x="80" y="106" font-size="16" fill="#f0f6fc">records the intent and shows it at once</text>
+<circle cx="34" cy="91.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="95.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">1</text>
+<rect x="64" y="130" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="152" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">USER → WRITE QUEUE</text>
+<text x="80" y="174" font-size="16" fill="#f0f6fc">enqueues it; the lease is checked</text>
+<circle cx="34" cy="159.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="163.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">2</text>
+<rect x="64" y="198" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="220" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">WRITE QUEUE → VENDOR API</text>
+<text x="80" y="242" font-size="16" fill="#f0f6fc">sends it; the lease is checked again</text>
+<circle cx="34" cy="227.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="231.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">3</text>
+<rect x="64" y="266" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="288" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">VENDOR API → SOURCE DATABASE</text>
+<text x="80" y="310" font-size="16" fill="#f0f6fc">updates order 42</text>
+<circle cx="34" cy="295.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="299.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">4</text>
+<rect x="64" y="334" width="736" height="58" rx="9" fill="#151b23" stroke="#3d444d" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="80" y="356" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">SOURCE DATABASE → CHANGE CAPTURE</text>
+<text x="80" y="378" font-size="16" fill="#f0f6fc">statement completed</text>
+<circle cx="34" cy="363.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="367.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">5</text>
+<rect x="64" y="402" width="736" height="58" rx="9" fill="#151b23" stroke="#3d444d" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="80" y="424" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">CHANGE CAPTURE → STORE</text>
+<text x="80" y="446" font-size="16" fill="#f0f6fc">hint: orders, key 42</text>
+<circle cx="34" cy="431.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="435.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">6</text>
+<rect x="64" y="470" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="492" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">STORE → SOURCE DATABASE</text>
+<text x="80" y="514" font-size="16" fill="#f0f6fc">re-reads order 42, committed only</text>
+<circle cx="34" cy="499.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="503.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">7</text>
+<rect x="64" y="538" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="560" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">STORE</text>
+<text x="80" y="582" font-size="16" fill="#f0f6fc">rebuilds order 42&#x27;s read models as version 1001</text>
+<circle cx="34" cy="567.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="571.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">8</text>
+<rect x="64" y="606" width="736" height="58" rx="9" fill="#151b23" stroke="#3d444d" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="80" y="628" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">STORE → USER</text>
+<text x="80" y="650" font-size="16" fill="#f0f6fc">version 1001, delivered whole</text>
+<circle cx="34" cy="635.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="639.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">9</text>
+<rect x="64" y="674" width="736" height="40" rx="9" fill="#121d2f" stroke="#4493f8" stroke-width="1.3"/>
+<text x="80" y="700" font-size="15" font-weight="650" fill="#f0f6fc">judged: state reached (a create would be confirmed by its ID)</text>
+<text x="20" y="780" font-size="19" font-weight="700" fill="#f0f6fc">2. Capture loses the event</text>
+<line x1="34" y1="829.0" x2="34" y2="1169.0" stroke="#3d444d" stroke-width="2"/>
+<rect x="64" y="800" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="822" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">WRITE QUEUE → VENDOR API</text>
+<text x="80" y="844" font-size="16" fill="#f0f6fc">sends the intent</text>
+<circle cx="34" cy="829.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="833.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">1</text>
+<rect x="64" y="868" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="890" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">VENDOR API → SOURCE DATABASE</text>
+<text x="80" y="912" font-size="16" fill="#f0f6fc">updates order 42</text>
+<circle cx="34" cy="897.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="901.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">2</text>
+<rect x="64" y="936" width="736" height="58" rx="9" fill="#25171c" stroke="#f85149" stroke-width="1.3"/>
+<text x="80" y="958" font-size="12" font-weight="650" letter-spacing=".03em" fill="#f85149">SOURCE DATABASE → CHANGE CAPTURE</text>
+<text x="80" y="980" font-size="16" fill="#f0f6fc">statement completed: the event is lost</text>
+<circle cx="34" cy="965.0" r="12" fill="#0d1117" stroke="#f85149" stroke-width="1.5"/>
+<text x="34" y="969.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">3</text>
+<rect x="64" y="1004" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="1026" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">USER</text>
+<text x="80" y="1048" font-size="16" fill="#f0f6fc">timeout: nothing has come back</text>
+<circle cx="34" cy="1033.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="1037.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">4</text>
+<rect x="64" y="1072" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="1094" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">STORE → SOURCE DATABASE</text>
+<text x="80" y="1116" font-size="16" fill="#f0f6fc">re-reads order 42 for the intent</text>
+<circle cx="34" cy="1101.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="1105.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">5</text>
+<rect x="64" y="1140" width="736" height="58" rx="9" fill="#151b23" stroke="#3d444d" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="80" y="1162" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">STORE → USER</text>
+<text x="80" y="1184" font-size="16" fill="#f0f6fc">changed: version 1001</text>
+<circle cx="34" cy="1169.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="1173.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">6</text>
+<rect x="64" y="1208" width="736" height="40" rx="9" fill="#121d2f" stroke="#4493f8" stroke-width="1.3"/>
+<text x="80" y="1234" font-size="15" font-weight="650" fill="#f0f6fc">resolved by observation, never resent</text>
+<text x="20" y="1314" font-size="19" font-weight="700" fill="#f0f6fc">3. The change rolls back</text>
+<line x1="34" y1="1363.0" x2="34" y2="1703.0" stroke="#3d444d" stroke-width="2"/>
+<rect x="64" y="1334" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="1356" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">VENDOR API → SOURCE DATABASE</text>
+<text x="80" y="1378" font-size="16" fill="#f0f6fc">updates order 42</text>
+<circle cx="34" cy="1363.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="1367.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">1</text>
+<rect x="64" y="1402" width="736" height="58" rx="9" fill="#151b23" stroke="#3d444d" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="80" y="1424" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">SOURCE DATABASE → CHANGE CAPTURE</text>
+<text x="80" y="1446" font-size="16" fill="#f0f6fc">statement completed</text>
+<circle cx="34" cy="1431.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="1435.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">2</text>
+<rect x="64" y="1470" width="736" height="58" rx="9" fill="#25171c" stroke="#f85149" stroke-width="1.3"/>
+<text x="80" y="1492" font-size="12" font-weight="650" letter-spacing=".03em" fill="#f85149">SOURCE DATABASE</text>
+<text x="80" y="1514" font-size="16" fill="#f0f6fc">the transaction rolls back</text>
+<circle cx="34" cy="1499.0" r="12" fill="#0d1117" stroke="#f85149" stroke-width="1.5"/>
+<text x="34" y="1503.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">3</text>
+<rect x="64" y="1538" width="736" height="58" rx="9" fill="#151b23" stroke="#3d444d" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="80" y="1560" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">CHANGE CAPTURE → STORE</text>
+<text x="80" y="1582" font-size="16" fill="#f0f6fc">hint: orders, key 42</text>
+<circle cx="34" cy="1567.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="1571.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">4</text>
+<rect x="64" y="1606" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="1628" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">STORE → SOURCE DATABASE</text>
+<text x="80" y="1650" font-size="16" fill="#f0f6fc">re-reads order 42, committed only</text>
+<circle cx="34" cy="1635.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="1639.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">5</text>
+<rect x="64" y="1674" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="1696" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">STORE</text>
+<text x="80" y="1718" font-size="16" fill="#f0f6fc">unchanged: no new version</text>
+<circle cx="34" cy="1703.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="1707.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">6</text>
+<rect x="64" y="1742" width="736" height="40" rx="9" fill="#121d2f" stroke="#4493f8" stroke-width="1.3"/>
+<text x="80" y="1768" font-size="15" font-weight="650" fill="#f0f6fc">values never arrived: undetermined, shown to the user</text>
+<text x="20" y="1848" font-size="19" font-weight="700" fill="#f0f6fc">4. The sending worker crashes</text>
+<line x1="34" y1="1897.0" x2="34" y2="2237.0" stroke="#3d444d" stroke-width="2"/>
+<rect x="64" y="1868" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="1890" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">WORKER A → VENDOR API</text>
+<text x="80" y="1912" font-size="16" fill="#f0f6fc">sends the intent</text>
+<circle cx="34" cy="1897.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="1901.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">1</text>
+<rect x="64" y="1936" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="1958" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">VENDOR API → SOURCE DATABASE</text>
+<text x="80" y="1980" font-size="16" fill="#f0f6fc">updates order 42</text>
+<circle cx="34" cy="1965.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="1969.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">2</text>
+<rect x="64" y="2004" width="736" height="58" rx="9" fill="#25171c" stroke="#f85149" stroke-width="1.3"/>
+<text x="80" y="2026" font-size="12" font-weight="650" letter-spacing=".03em" fill="#f85149">WORKER A</text>
+<text x="80" y="2048" font-size="16" fill="#f0f6fc">crashes before recording the send</text>
+<circle cx="34" cy="2033.0" r="12" fill="#0d1117" stroke="#f85149" stroke-width="1.5"/>
+<text x="34" y="2037.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">3</text>
+<rect x="64" y="2072" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="2094" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">WORKER B</text>
+<text x="80" y="2116" font-size="16" fill="#f0f6fc">claims the intent: outcome uncertain</text>
+<circle cx="34" cy="2101.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="2105.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">4</text>
+<rect x="64" y="2140" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="2162" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">WORKER B → STORE</text>
+<text x="80" y="2184" font-size="16" fill="#f0f6fc">checks order 42 first</text>
+<circle cx="34" cy="2169.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="2173.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">5</text>
+<rect x="64" y="2208" width="736" height="58" rx="9" fill="#151b23" stroke="#3d444d" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="80" y="2230" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">STORE → WORKER B</text>
+<text x="80" y="2252" font-size="16" fill="#f0f6fc">already holds the change</text>
+<circle cx="34" cy="2237.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="2241.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">6</text>
+<rect x="64" y="2276" width="736" height="40" rx="9" fill="#121d2f" stroke="#4493f8" stroke-width="1.3"/>
+<text x="80" y="2302" font-size="15" font-weight="650" fill="#f0f6fc">judged on what the store shows; the API is never called twice</text>
+<text x="20" y="2382" font-size="19" font-weight="700" fill="#f0f6fc">5. Someone edits order 42 in the vendor&#x27;s app</text>
+<line x1="34" y1="2431.0" x2="34" y2="2703.0" stroke="#3d444d" stroke-width="2"/>
+<rect x="64" y="2402" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="2424" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">WRITE QUEUE → VENDOR API</text>
+<text x="80" y="2446" font-size="16" fill="#f0f6fc">sends status = shipped</text>
+<circle cx="34" cy="2431.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="2435.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">1</text>
+<rect x="64" y="2470" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="2492" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">VENDOR APP USER → SOURCE DATABASE</text>
+<text x="80" y="2514" font-size="16" fill="#f0f6fc">edits order 42 directly</text>
+<circle cx="34" cy="2499.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="2503.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">2</text>
+<rect x="64" y="2538" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="2560" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">VENDOR API → SOURCE DATABASE</text>
+<text x="80" y="2582" font-size="16" fill="#f0f6fc">updates order 42</text>
+<circle cx="34" cy="2567.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="2571.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">3</text>
+<rect x="64" y="2606" width="736" height="58" rx="9" fill="#151b23" stroke="#3d444d" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="80" y="2628" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">CHANGE CAPTURE → STORE</text>
+<text x="80" y="2650" font-size="16" fill="#f0f6fc">both changes captured and re-read</text>
+<circle cx="34" cy="2635.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="2639.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">4</text>
+<rect x="64" y="2674" width="736" height="58" rx="9" fill="#151b23" stroke="#3d444d" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="80" y="2696" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">STORE → USER</text>
+<text x="80" y="2718" font-size="16" fill="#f0f6fc">the latest version of order 42</text>
+<circle cx="34" cy="2703.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="2707.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">5</text>
+<rect x="64" y="2742" width="736" height="40" rx="9" fill="#121d2f" stroke="#4493f8" stroke-width="1.3"/>
+<text x="80" y="2768" font-size="15" font-weight="650" fill="#f0f6fc">same values: state reached; different: undetermined</text>
+<text x="20" y="2848" font-size="19" font-weight="700" fill="#f0f6fc">6. A client was offline overnight</text>
+<line x1="34" y1="2897.0" x2="34" y2="3101.0" stroke="#3d444d" stroke-width="2"/>
+<rect x="64" y="2868" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="2890" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">CLIENT</text>
+<text x="80" y="2912" font-size="16" fill="#f0f6fc">comes back, last saw version 1001</text>
+<circle cx="34" cy="2897.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="2901.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">1</text>
+<rect x="64" y="2936" width="736" height="58" rx="9" fill="#0d1117" stroke="#3d444d" stroke-width="1.3"/>
+<text x="80" y="2958" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">CLIENT → STORE</text>
+<text x="80" y="2980" font-size="16" fill="#f0f6fc">resume after version 1001</text>
+<circle cx="34" cy="2965.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="2969.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">2</text>
+<rect x="64" y="3004" width="736" height="58" rx="9" fill="#151b23" stroke="#3d444d" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="80" y="3026" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">STORE → CLIENT</text>
+<text x="80" y="3048" font-size="16" fill="#f0f6fc">outbox still holds it: 1002 onward, whole versions, in order</text>
+<circle cx="34" cy="3033.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="3037.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">3</text>
+<rect x="64" y="3072" width="736" height="58" rx="9" fill="#151b23" stroke="#3d444d" stroke-width="1.3" stroke-dasharray="6 4"/>
+<text x="80" y="3094" font-size="12" font-weight="650" letter-spacing=".03em" fill="#9198a1">STORE → CLIENT</text>
+<text x="80" y="3116" font-size="16" fill="#f0f6fc">or, too old: resync the read models instead of replaying</text>
+<circle cx="34" cy="3101.0" r="12" fill="#0d1117" stroke="#3d444d" stroke-width="1.5"/>
+<text x="34" y="3105.0" text-anchor="middle" font-size="11.5" font-weight="700" fill="#9198a1">4</text>
+<rect x="64" y="3140" width="736" height="40" rx="9" fill="#121d2f" stroke="#4493f8" stroke-width="1.3"/>
+<text x="80" y="3166" font-size="15" font-weight="650" fill="#f0f6fc">resumed in order, or resynced; never a partial version</text>
+</svg>
