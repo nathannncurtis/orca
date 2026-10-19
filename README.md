@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/orca-mark-dark.svg">
+    <img alt="ORCA" src="docs/orca-mark-light.svg" width="280">
+  </picture>
+</p>
+
 # ORCA: Operational store, Read models, Change capture, Anti-corruption layer
 
 ORCA is an architectural pattern for building a fast, independent application platform on top of a system you do not
