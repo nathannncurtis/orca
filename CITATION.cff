@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use or adapt the ORCA pattern, please cite it as below."
+title: "ORCA: Operational store, Read models, Change capture, Anti-corruption layer"
+abstract: >-
+  An architectural pattern for building a fast, independent application platform on top of a system you do not own
+  and cannot change: a translated, live copy for reads, with every write sent back through the vendor.
+type: report
+authors:
+  - family-names: Curtis
+    given-names: Nathan
+    email: nathan@nathancurtis.me
+    website: "https://nathancurtis.me"
+version: "0.9"
+date-released: "2026-10-19"
+license: CC-BY-4.0
+repository-code: "https://github.com/nathannncurtis/orca"
+url: "https://github.com/nathannncurtis/orca"
+keywords:
+  - software architecture
+  - architectural pattern
+  - change data capture
+  - anti-corruption layer
+  - read models
+  - CQRS

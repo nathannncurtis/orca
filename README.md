@@ -10,7 +10,7 @@
 ORCA is an architectural pattern for building a fast, independent application platform on top of a system you do not
 own and cannot change. It is not a stack: any language, database or message bus can implement it.
 
-Draft. Not yet published.
+Version 0.9. Still being written: the pattern is settled, the wording is not.
 
 ## The problem
 
@@ -224,3 +224,9 @@ assumes you own the write side. ORCA assumes neither, and says exactly which gua
 
 **Any equivalent works:** log-based capture such as Debezium, another database, Kafka for delivery, or SQLite on
 clients.
+
+## License
+
+The text and diagrams are licensed under [Creative Commons Attribution 4.0](LICENSE). Use them, adapt them, build on
+them; credit Nathan Curtis and link back here. To cite ORCA, use the "Cite this repository" button on GitHub or the
+details in [CITATION.cff](CITATION.cff).
