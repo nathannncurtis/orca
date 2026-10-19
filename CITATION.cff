@@ -4,7 +4,6 @@ title: "ORCA: Operational store, Read models, Change capture, Anti-corruption la
 abstract: >-
   An architectural pattern for building a fast, independent application platform on top of a system you do not own
   and cannot change: a translated, live copy for reads, with every write sent back through the vendor.
-type: report
 authors:
   - family-names: Curtis
     given-names: Nathan
@@ -22,3 +21,13 @@ keywords:
   - anti-corruption layer
   - read models
   - CQRS
+preferred-citation:
+  type: report
+  title: "ORCA: Operational store, Read models, Change capture, Anti-corruption layer"
+  authors:
+    - family-names: Curtis
+      given-names: Nathan
+  version: "0.9"
+  year: 2026
+  month: 10
+  url: "https://github.com/nathannncurtis/orca"
