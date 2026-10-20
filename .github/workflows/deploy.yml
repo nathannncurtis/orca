@@ -1,0 +1,52 @@
+name: Deploy
+
+# Push to main and site/ goes to Cloudflare as static files. The Worker's config is written here,
+# so the repo carries no wrangler file of its own.
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/deploy.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the site
+        run: |
+          for f in index.html 404.html orca.pdf og.png apple-touch-icon.png robots.txt sitemap.xml llms.txt .well-known/security.txt; do
+            test -s "site/$f" || { echo "::error::missing site/$f"; exit 1; }
+          done
+
+      - name: Write the Worker config
+        run: |
+          cat > wrangler.jsonc <<'JSON'
+          {
+            "name": "orcapattern-org",
+            "compatibility_date": "2026-10-01",
+            "assets": {
+              "directory": "./site",
+              "not_found_handling": "404-page",
+              "html_handling": "auto-trailing-slash"
+            },
+            "workers_dev": true,
+            "observability": { "enabled": false }
+          }
+          JSON
+
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4.151.2"
+          command: deploy
