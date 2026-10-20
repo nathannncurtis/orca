@@ -9,6 +9,8 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23493407.svg)](https://doi.org/10.5281/zenodo.23493407)
 
+The full paper is at [orcapattern.org](https://orcapattern.org), with a [typeset PDF](https://orcapattern.org/orca.pdf) for printing. This README is the short form.
+
 ORCA is an architectural pattern for building a fast, independent application platform on top of a system you do not
 own and cannot change. It is not a stack: any language, database or message bus can implement it.
 
@@ -230,5 +232,6 @@ clients.
 ## License
 
 The text and diagrams are licensed under [Creative Commons Attribution 4.0](LICENSE). Use them, adapt them, build on
-them; credit Nathan Curtis and link back here. To cite ORCA, use the "Cite this repository" button on GitHub or the
+them; credit Nathan Curtis and link to [orcapattern.org](https://orcapattern.org). To cite ORCA, use its DOI,
+[10.5281/zenodo.23493407](https://doi.org/10.5281/zenodo.23493407), the "Cite this repository" button on GitHub, or the
 details in [CITATION.cff](CITATION.cff).
