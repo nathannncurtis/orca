@@ -61,7 +61,7 @@ Your own full copy of the vendor's data, kept current.
 - **First copy:** resumable and paced, in key order, so the vendor's system never feels it.
 - **Re-read on every hint:** the touched rows are re-read from the source by primary key, with a read that only sees
   committed data. A rolled-back change re-reads as the original. The hint only decides where to look; the source
-  decides what is true.
+  decides the truth.
 - **Reconciliation:** checksums compared by key range, re-copying only ranges that differ. It runs after every gap,
   as soon as each table's first copy finishes, and on a slow schedule. Reconciliation always wins over the copy and
   over the stream.
