@@ -345,12 +345,10 @@
   .inv .inv-h { font: 600 13px/1 var(--mono); color: var(--accent); margin-bottom: 12px; }
   pre.algo { font: 14px/1.65 var(--mono); color: var(--body); background: var(--panel); border-radius: 8px; padding: 16px 20px; margin: 4px 0 22px; overflow-x: auto; }
   pre.algo .kw { color: var(--accent); font-weight: 500; }
-  p.measure mark { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--ink); padding: 0 4px; border-radius: 3px; font: 500 .9em var(--mono); }
   @media (max-width: 720px) { dl.terms { grid-template-columns: 1fr; gap: 2px; } dl.terms dd { margin-bottom: 8px; } }
 
   ol.contrib { margin: 0 0 1em; padding-left: 1.3em; } ol.contrib li { margin: 0 0 .6em; padding-left: .2em; } ol.contrib li::marker { color: var(--accent); font-weight: 600; }
   td.iv { font: 500 13px/1.5 var(--mono); color: var(--accent); white-space: nowrap; }
-  ul.measure mark { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--ink); padding: 0 4px; border-radius: 3px; font: 500 .9em var(--mono); }
 
   /* vector status icons, centered */
   :root { --ic-ok: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.6 8.4l2.9 2.9 5.9-6.6' fill='none' stroke='%232c7a4b' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); --ic-no: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.8 4.8l6.4 6.4M11.2 4.8l-6.4 6.4' fill='none' stroke='%23a5402e' stroke-width='1.9' stroke-linecap='round'/%3E%3C/svg%3E"); --ic-z: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='1.7' fill='%2362676d'/%3E%3C/svg%3E"); }
@@ -525,8 +523,6 @@
   <p class="reveal">The database server is the one place every writer passes through. A trace session there sees the vendor's desktop clients, its API, its web portal and its scheduled jobs alike; capture taken from the API or from client traffic only sees the writers that use it.</p>
   <p class="reveal">The capturing service runs next to the database, writes to bounded rolling files, and serves records over a long poll with a resume position. A consumer that falls behind the files' retention gets a gap rather than a silent hole.</p>
 
-  <p class="reveal measure">In the implementation in section 10, <mark>[share]</mark> of changes were first seen by reconciliation rather than capture. Capture to hint took <mark>[p50]</mark> at the median.</p>
-
   <h3 class="sub" id="store"><span class="num">3.2</span>Operational store</h3>
   <p class="def reveal">Your own current and full copy of the vendor's data.</p>
   <p class="reveal">A copy of every vendor database table. Anything downstream reads from it; it converges on what the source has committed without needing any trust in what the capture is. Its four parts are: a paced first copy, a re-read on hint, reconciliation by key range, and a raw layer.</p>
@@ -574,8 +570,6 @@
   <h4 class="subsub">The raw layer</h4>
   <p class="reveal">The vendor's tables, kept exactly with a checksum per row. Nothing downstream reads them; they let the translation layer (3.3) and the read models be rebuilt without touching the vendor. A table schema that changes is copied again.</p>
 
-  <p class="reveal measure">In the implementation in section 10, <mark>[share of passes]</mark> of reconciliation passes found a range capture had missed. Capture to rebuilt read model took <mark>[p50]</mark> at the median and <mark>[p95]</mark> at the 95th percentile.</p>
-
   <h3 class="sub" id="acl"><span class="num">3.3</span>Anti-corruption layer</h3>
   <p class="def reveal">A translation library that turns the vendor's model into yours.</p>
   <aside class="fork reveal"><span class="k">The obvious choice</span>Translate at the boundary, inside the service that reads the vendor.<span class="k">Why ORCA doesn't</span>Clients' fallback reads the source directly too. A library with no I/O, shared by both, gives the vendor's model one home.</aside>
@@ -606,9 +600,8 @@
     rows ← source.fetch(declared_tables, entity)   <span class="kw">#</span> store or vendor
     <span class="kw">return</span> translate(rows, lookups)</pre>
 
-  <h4 class="subsub">Checked against the vendor</h4>
+  <h4 class="subsub">Checked against the source</h4>
   <p class="reveal">A translation that's wrong is wrong everywhere at once, so it's checked. Every night, random entities are built from the store and compared field by field with the same entities built by independent queries straight from the source. A difference is read again a moment later and counts only if it persists.</p>
-  <p class="reveal measure">In the implementation in section 10, <mark>[n]</mark> of <mark>[N]</mark> entities checked per night differed on average.</p>
 
   <h3 class="sub" id="read-models"><span class="num">3.4</span>Read models</h3>
   <p class="def reveal">Screen-shaped documents built by the translation layer from the raw layer.</p>
@@ -866,14 +859,6 @@
       </tbody>
     </table>
   </div>
-
-  <h4 class="subsub">Measured</h4>
-  <ul class="items reveal stagger measure">
-    <li>Tables copied: <mark>[n]</mark>; rows: <mark>[n]</mark>; first copy took <mark>[t]</mark>.</li>
-    <li>Capture to rebuilt read model: <mark>[p50]</mark> at the median, <mark>[p95]</mark> at the 95th percentile.</li>
-    <li>Reconciliation passes that found a range capture had missed: <mark>[share]</mark>.</li>
-    <li>Entities differing from the vendor in the nightly check: <mark>[n]</mark> of <mark>[N]</mark>.</li>
-  </ul>
 </section>
 
 <section id="conclusion">
