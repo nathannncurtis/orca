@@ -2,7 +2,7 @@
 
 > ORCA (Operational store, Read models, Change capture, Anti-corruption layer) is an architectural pattern for building a fast, independent platform on top of a system you do not own and cannot change: own a translated, live copy for reads, and send every write back through the vendor. It is a pattern, not a stack; any language, database or message bus can implement it.
 
-Version 0.9, by Nathan Curtis. The pattern is settled; the wording is not.
+Version 1.0, by Nathan Curtis.
 
 ## The four parts
 
@@ -22,7 +22,7 @@ Nothing writes to the vendor's database directly; every write goes through the v
 
 ## Use
 
-The text and diagrams are CC BY 4.0: use them, adapt them, build on them; credit Nathan Curtis and link to orcapattern.org. Cite it as: Curtis, N. (2026). ORCA: Operational store, Read models, Change capture, Anti-corruption layer (Version 0.9). https://orcapattern.org
+The text and diagrams are CC BY 4.0: use them, adapt them, build on them; credit Nathan Curtis and link to orcapattern.org. Cite it as: Curtis, N. (2026). ORCA: Operational store, Read models, Change capture, Anti-corruption layer (Version 1.0). https://orcapattern.org
 
 ## Contact
 

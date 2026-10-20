@@ -1,0 +1,30 @@
+{
+  "upload_type": "publication",
+  "publication_type": "report",
+  "title": "ORCA: Operational store, Read models, Change capture, Anti-corruption layer",
+  "description": "An architectural pattern for building a fast, independent platform on top of a system you do not own and cannot change: a translated, live copy for reads, with every write sent back through the vendor.",
+  "creators": [
+    {
+      "name": "Curtis, Nathan",
+      "orcid": "0009-0008-0350-5799"
+    }
+  ],
+  "version": "1.0",
+  "license": "cc-by-4.0",
+  "language": "eng",
+  "keywords": [
+    "software architecture",
+    "architectural pattern",
+    "change data capture",
+    "anti-corruption layer",
+    "read models",
+    "CQRS"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://orcapattern.org",
+      "relation": "isDocumentedBy",
+      "resource_type": "publication-report"
+    }
+  ]
+}
