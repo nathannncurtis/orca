@@ -9,6 +9,8 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23493407.svg)](https://doi.org/10.5281/zenodo.23493407)
 
+Nathan Curtis · ORCID [0009-0008-0350-5799](https://orcid.org/0009-0008-0350-5799)
+
 The full paper is at [orcapattern.org](https://orcapattern.org), with a [typeset PDF](https://orcapattern.org/orca.pdf) for printing. This README is the short form.
 
 ORCA is an architectural pattern for building a fast, independent application platform on top of a system you do not
