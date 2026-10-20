@@ -607,7 +607,7 @@
     <span class="kw">return</span> translate(rows, lookups)</pre>
 
   <h4 class="subsub">Checked against the vendor</h4>
-  <p class="reveal">A translation that's wrong is wrong everywhere at once, so it's checked. Every night, random entities are built from the store and compared field by field with what the vendor's own application shows for them, read straight from the source. A difference is read again a moment later and counts only if it persists.</p>
+  <p class="reveal">A translation that's wrong is wrong everywhere at once, so it's checked. Every night, random entities are built from the store and compared field by field with the same entities built by independent queries straight from the source. A difference is read again a moment later and counts only if it persists.</p>
   <p class="reveal measure">In the implementation in section 10, <mark>[n]</mark> of <mark>[N]</mark> entities checked per night differed on average.</p>
 
   <h3 class="sub" id="read-models"><span class="num">3.4</span>Read models</h3>
@@ -838,13 +838,13 @@
   <h4 class="subsub">Store</h4>
   <p class="reveal">A Rust service keeps every source table in PostgreSQL, in its own schema: the same table names, columns and primary keys, plus one row checksum column. Types map directly, with two losses worth knowing: <code>datetime2(7)</code> keeps six fractional digits, and a NUL inside a string is dropped. One column of stored documents, nearly 200 GB, isn't copied; it's fetched from the vendor when someone opens a document.</p>
   <p class="reveal">Re-reads use <code>READCOMMITTEDLOCK</code>, so a rolled-back write is never copied. Range checksums are computed on both sides with dirty reads to keep them cheap. A summary that's wrong at worst copies a range for nothing or leaves it for the next pass; the copy itself is committed-only. A table whose key includes a <code>uniqueidentifier</code> is reconciled as one range, because the two engines order those differently. A table with no primary key is copied and checked whole.</p>
-  <p class="reveal">The source never sees more than three connections: one for capture, one for the first copy and reconciliation, and one for the nightly check. Every statement has a timeout. Every ten minutes the service compares the source's tables, columns, types and keys with what it copied; on a change it exits, a supervisor restarts it, and changed tables are copied again.</p>
+  <p class="reveal">The source never sees more than three connections: one for re-reads on hints, one for the first copy and reconciliation, and one for the nightly check. Every statement has a timeout. Every ten minutes the service compares the source's tables, columns, types and keys with what it copied; on a change it exits, a supervisor restarts it, and changed tables are copied again.</p>
 
   <h4 class="subsub">Reconciliation</h4>
   <p class="reveal">Requests are numbered from a sequence. A table is covered up to the number that was current when its pass began, so a request that arrives during a pass gets another one. Large tables wait for an evening window; a pass still running when the window closes stops between ranges and resumes there the next night. Tables due go oldest attempt first, so one that keeps failing can't hold up the rest.</p>
 
   <h4 class="subsub">Read models and delivery</h4>
-  <p class="reveal">Shapes are built from the raw schema only, 500 entities at a time on a full build. Lookups are re-read every minute; a changed customer rebuilds that customer's entities, and any other changed lookup rebuilds everything. Redis on a separate host fans versions out and keeps a stream per audience. Desktop clients keep open records plus the last year in LMDB, with a fuzzy index for search, and resume over a websocket by version; when the platform is down they run the same translation crate against SQL Server.</p>
+  <p class="reveal">Shapes are built from the raw schema only, 500 entities at a time on a full build. Lookups are re-read every minute; a changed customer or contact rebuilds that customer's entities, and any other changed lookup rebuilds everything. Redis on a separate host fans versions out and keeps a stream per audience. Desktop clients keep open records plus the last year in LMDB, with a fuzzy index for search, and resume over a websocket by version; when the platform is down they run the same translation crate against SQL Server.</p>
 
   <h4 class="subsub">Writes</h4>
   <p class="reveal">Each intent goes into an append-only, checksummed local log and shows on screen at once, with a five-second undo. A PostgreSQL queue claims intents with <code>FOR UPDATE SKIP LOCKED</code>. Leases take fencing tokens from a PostgreSQL sequence, and the vendor's own record locks are mirrored into the same leases. Mobile apps keep their own offline queue; the service that forwards their writes checks the record's lease first.</p>
