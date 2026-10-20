@@ -22,7 +22,7 @@ Nothing writes to the vendor's database directly; every write goes through the v
 
 ## Use
 
-The text and diagrams are CC BY 4.0: use them, adapt them, build on them; credit Nathan Curtis and link to orcapattern.org. Cite it as: Curtis, N. (2026). ORCA: Operational store, Read models, Change capture, Anti-corruption layer (Version 1.0). https://orcapattern.org
+The text and diagrams are CC BY 4.0: use them, adapt them, build on them; credit Nathan Curtis and link to orcapattern.org. Cite it as: Curtis, N. (2026). ORCA: Operational store, Read models, Change capture, Anti-corruption layer (Version 1.0). https://doi.org/10.5281/zenodo.23493408
 
 ## Contact
 

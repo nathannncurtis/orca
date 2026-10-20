@@ -7,6 +7,8 @@
 
 # ORCA: Operational store, Read models, Change capture, Anti-corruption layer
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23493407.svg)](https://doi.org/10.5281/zenodo.23493407)
+
 ORCA is an architectural pattern for building a fast, independent application platform on top of a system you do not
 own and cannot change. It is not a stack: any language, database or message bus can implement it.
 

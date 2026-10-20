@@ -11,6 +11,7 @@ authors:
     email: nathan@nathancurtis.me
     website: "https://nathancurtis.me"
 version: "1.0"
+doi: 10.5281/zenodo.23493407
 date-released: "2026-10-20"
 license: CC-BY-4.0
 repository-code: "https://github.com/nathannncurtis/orca"
@@ -30,6 +31,7 @@ preferred-citation:
       given-names: Nathan
       orcid: "https://orcid.org/0009-0008-0350-5799"
   version: "1.0"
+  doi: 10.5281/zenodo.23493408
   year: 2026
   month: 10
   url: "https://orcapattern.org"
