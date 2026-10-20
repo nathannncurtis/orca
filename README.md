@@ -10,7 +10,7 @@
 ORCA is an architectural pattern for building a fast, independent application platform on top of a system you do not
 own and cannot change. It is not a stack: any language, database or message bus can implement it.
 
-Version 0.9. Still being written: the pattern is settled, the wording is not.
+Version 1.0.
 
 ## The problem
 
