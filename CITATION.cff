@@ -7,6 +7,7 @@ abstract: >-
 authors:
   - family-names: Curtis
     given-names: Nathan
+    orcid: "https://orcid.org/0009-0008-0350-5799"
     email: nathan@nathancurtis.me
     website: "https://nathancurtis.me"
 version: "0.9"
@@ -27,6 +28,7 @@ preferred-citation:
   authors:
     - family-names: Curtis
       given-names: Nathan
+      orcid: "https://orcid.org/0009-0008-0350-5799"
   version: "0.9"
   year: 2026
   month: 10
