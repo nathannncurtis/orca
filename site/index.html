@@ -130,13 +130,6 @@
   :root { --ok: #2c7a4b; --ok-bg: #e2f0e6; --mid: #8a6416; --mid-bg: #f5ecd6; --no: #a5402e; --no-bg: #f6e2dd; --panel: #f3f3ef; }
   
 
-  .cover { margin: 52px 0 0; background: var(--panel); border-radius: 10px; padding: 34px 34px 30px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
-  @media (min-width: 1200px) { .cover { margin-right: -350px; padding: 40px 44px 36px; } }
-  .cover a { text-decoration: none; display: block; }
-  .cover .L { display: block; font: 600 72px/1 var(--sans); letter-spacing: -.03em; color: var(--ink); }
-  .cover .t { display: block; font: 600 16px/1.3 var(--sans); color: var(--ink); margin: 14px 0 6px; }
-  .cover .d { display: block; font-size: 14.5px; line-height: 1.5; color: var(--dim); }
-  .cover a:hover .t { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 4px; }
 
   section { border-top: 1px solid var(--line); margin-top: 84px; padding-top: 30px; }
   section#problem { margin-top: 72px; }
@@ -185,8 +178,6 @@
   .scenario .head b { font-size: 16.5px; }
 
   @media (max-width: 720px) {
-    .cover { grid-template-columns: 1fr 1fr; padding: 24px 20px; gap: 22px; }
-    .cover .L { font-size: 52px; }
     blockquote.pull { font-size: 22px; }
     h2.sec { font-size: 26px; }
     .score { font-size: 13.5px; } .score td, .score th { padding-left: 4px; padding-right: 4px; }
@@ -212,9 +203,6 @@
 
   /* motion */
   @media (prefers-reduced-motion: no-preference) {
-    .js .cover a { opacity: 0; transform: translateY(18px); animation: rise .9s cubic-bezier(.2,.7,.2,1) forwards; }
-    .js .cover a:nth-child(1) { animation-delay: .15s; } .js .cover a:nth-child(2) { animation-delay: .27s; }
-    .js .cover a:nth-child(3) { animation-delay: .39s; } .js .cover a:nth-child(4) { animation-delay: .51s; }
     @keyframes rise { to { opacity: 1; transform: none; } }
     .js header.paper > * { opacity: 0; animation: rise .8s cubic-bezier(.2,.7,.2,1) forwards; transform: translateY(8px); }
     .js header.paper > *:nth-child(2) { animation-delay: .06s; } .js header.paper > *:nth-child(3) { animation-delay: .12s; } .js header.paper > *:nth-child(4) { animation-delay: .16s; }
@@ -266,10 +254,6 @@
       @keyframes par-slow { to { transform: translateY(38vh); opacity: .2; } }
       @keyframes par-fast { to { transform: translateY(60vh) scale(1.2); opacity: 0; } }
 
-      .cover .L { animation: drift linear both; animation-timeline: view(); animation-range: entry 60% exit 100%; }
-      .cover a:nth-child(1) .L { --k: -26px; } .cover a:nth-child(2) .L { --k: -10px; }
-      .cover a:nth-child(3) .L { --k: -40px; } .cover a:nth-child(4) .L { --k: -18px; }
-      @keyframes drift { from { transform: translateY(calc(var(--k) * -1)); } to { transform: translateY(var(--k)); } }
 
       section { border-top-color: transparent; }
       section::after { content: ""; position: absolute; left: 0; top: -1px; height: 1px; width: 100%; background: var(--line); transform-origin: left;
@@ -278,8 +262,6 @@
       section.band::after { display: none; }
       @keyframes rule { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
-      figure img { animation: focus linear both; animation-timeline: view(); animation-range: entry 0% cover 35%; }
-      @keyframes focus { from { transform: scale(.94); opacity: .35; filter: blur(2px); } to { transform: none; opacity: 1; filter: none; } }
 
       .def { animation: slide linear both; animation-timeline: view(); animation-range: entry 0% entry 90%; }
       @keyframes slide { from { transform: translateX(-14px); opacity: .3; } to { transform: none; opacity: 1; } }
@@ -300,9 +282,6 @@
   svg.ov .e.w { stroke: var(--accent); }
   svg.ov .e.dash { stroke-dasharray: 5 6; stroke: var(--dim); }
   svg.ov .ahf { fill: color-mix(in srgb, var(--ink) 62%, transparent); } svg.ov .ahw { fill: var(--accent); }
-  svg.ov .dot.r { fill: var(--ink); } svg.ov .dot.w { fill: var(--accent); }
-  svg.ov .dot { opacity: 0; }
-  .ovfig.in svg.ov .dot, .still svg.ov .dot { opacity: .85; transition: opacity .6s 1.8s; }
   @media (prefers-reduced-motion: no-preference) {
     .js svg.ov .nd { opacity: 0; transform: translateY(8px); transform-box: fill-box; transition: opacity .6s, transform .6s cubic-bezier(.2,.6,.2,1); transition-delay: calc(var(--i) * 80ms); }
     .js .ovfig.in svg.ov .nd { opacity: 1; transform: none; }
@@ -313,7 +292,6 @@
     .js .ovfig.in svg.ov marker path { opacity: 1; }
     figure.ovfig svg { animation: none !important; }
   }
-  @media (prefers-reduced-motion: reduce) { svg.ov .dot { display: none; } }
 
   /* figure 2: scenarios */
   .scns { margin: 26px 0 0; display: grid; gap: 14px; }
@@ -338,7 +316,7 @@
 
   .mb { fill: var(--ink); } .mp { fill: var(--bg); }
   .mark-top { display: block; width: 76px; height: 38px; margin: 0 0 26px -2px; }
-  .endmark { display: flex; justify-content: center; margin: 56px 0 0; }
+  .endmark { display: flex; justify-content: center; margin: 72px 0 0; }
   .endmark svg { width: 46px; height: 23px; }
   @media (prefers-reduced-motion: no-preference) {
     .js .endmark.reveal { transform: translateX(-28px); opacity: 0; transition: opacity 1.2s cubic-bezier(.2,.6,.2,1), transform 1.6s cubic-bezier(.2,.6,.2,1); }
@@ -353,10 +331,42 @@
   @media (prefers-color-scheme: dark) { :root { --ok: #74c494; --ok-bg: #16281d; --mid: #d9b063; --mid-bg: #2a2314; --no: #e48a76; --no-bg: #2c1914; --panel: #16191b; } }
 
   @media (prefers-color-scheme: dark) { .mb { fill: #1b1a17; stroke: #8d877c; stroke-width: 7; stroke-linejoin: round; } .mp { fill: #f6f4ef; } }
+
+  a.ic svg.i { width: 14px; height: 14px; fill: currentColor; vertical-align: -2px; margin-right: 6px; opacity: .85; transition: opacity .2s; }
+  a.ic:hover svg.i { opacity: 1; }
+  .abstract .xp { color: var(--dim); }
+  .abstract .xp b { color: var(--ink); font-weight: 600; }
+  h4.subsub { font: 600 17px/1.3 var(--sans); color: var(--ink); margin: 34px 0 10px; }
+  dl.terms { display: grid; grid-template-columns: max-content 1fr; gap: 8px 22px; margin: 6px 0 26px; padding: 18px 20px; border: 1px solid var(--line); border-radius: 8px; font-size: 16px; line-height: 1.5; }
+  dl.terms dt { font-weight: 600; color: var(--ink); }
+  dl.terms dd { margin: 0; color: var(--body); }
+  .inv { margin: 0 0 28px; padding: 16px 20px; border-left: 3px solid var(--accent); background: var(--panel); border-radius: 0 8px 8px 0; }
+  .inv p { margin: 0 0 8px; font-size: 16.5px; line-height: 1.55; } .inv p:last-child { margin: 0; }
+  .inv .inv-h { font: 600 13px/1 var(--mono); color: var(--accent); margin-bottom: 12px; }
+  pre.algo { font: 14px/1.65 var(--mono); color: var(--body); background: var(--panel); border-radius: 8px; padding: 16px 20px; margin: 4px 0 22px; overflow-x: auto; }
+  pre.algo .kw { color: var(--accent); font-weight: 500; }
+  p.measure mark { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--ink); padding: 0 4px; border-radius: 3px; font: 500 .9em var(--mono); }
+  @media (max-width: 720px) { dl.terms { grid-template-columns: 1fr; gap: 2px; } dl.terms dd { margin-bottom: 8px; } }
+
+  ol.contrib { margin: 0 0 1em; padding-left: 1.3em; } ol.contrib li { margin: 0 0 .6em; padding-left: .2em; } ol.contrib li::marker { color: var(--accent); font-weight: 600; }
+  td.iv { font: 500 13px/1.5 var(--mono); color: var(--accent); white-space: nowrap; }
+  ul.measure mark { background: color-mix(in srgb, var(--accent) 18%, transparent); color: var(--ink); padding: 0 4px; border-radius: 3px; font: 500 .9em var(--mono); }
+
+  /* vector status icons, centered */
+  :root { --ic-ok: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.6 8.4l2.9 2.9 5.9-6.6' fill='none' stroke='%232c7a4b' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); --ic-no: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.8 4.8l6.4 6.4M11.2 4.8l-6.4 6.4' fill='none' stroke='%23a5402e' stroke-width='1.9' stroke-linecap='round'/%3E%3C/svg%3E"); --ic-z: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='1.7' fill='%2362676d'/%3E%3C/svg%3E"); }
+  @media (prefers-color-scheme: dark) { :root { --ic-ok: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.6 8.4l2.9 2.9 5.9-6.6' fill='none' stroke='%2374c494' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); --ic-no: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.8 4.8l6.4 6.4M11.2 4.8l-6.4 6.4' fill='none' stroke='%23e48a76' stroke-width='1.9' stroke-linecap='round'/%3E%3C/svg%3E"); --ic-z: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='1.7' fill='%23979ca1'/%3E%3C/svg%3E"); } }
+  .mk { font-size: 0 !important; color: transparent; background-repeat: no-repeat; background-position: center; background-size: 62% 62%; }
+  .mk.y { background-color: var(--ok-bg); background-image: var(--ic-ok); }
+  .mk.n { background-color: var(--no-bg); background-image: var(--ic-no); }
+  .mk.z { background-image: var(--ic-z); background-size: 100% 100%; }
+  .js .table.in .score .mk.z { opacity: .6; }
+  .pair .yes > li::before, .pair .no > li::before { content: ""; background-repeat: no-repeat; background-position: center; background-size: 62% 62%; }
+  .pair .yes > li::before { background-image: var(--ic-ok); }
+  .pair .no > li::before { background-image: var(--ic-no); }
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="orca-mark" viewBox="486 320 1075 534"><path class="mb" d="M 530.222 635.141 C 547.203 567.457 589.076 570.125 647.27 554.305 C 697.307 540.771 747.587 530.682 798.465 521.12 C 815.886 517.846 859.211 515.142 871.9 505.796 C 907.603 479.502 915.137 417.991 939.705 383.278 C 952.237 365.572 964.796 344.166 986.058 346.148 C 996.913 347.159 989.92 379.52 990.394 386.557 C 988.222 418.954 985.806 488.778 1022 504.984 C 1032.87 509.856 1079.54 515.003 1095.41 518.389 C 1199.45 540.447 1300.37 582.269 1377.31 657.622 C 1387.91 668.013 1418.34 705.131 1426.12 708.705 C 1467.05 727.512 1516.78 722.951 1537.92 775.437 C 1500.56 750.272 1476.63 750.853 1433.03 746.769 C 1430.03 750.883 1433.29 752.347 1430.36 753.613 C 1414.94 742.903 1400.89 742.279 1382.71 744.836 C 1368.94 746.772 1363.15 752.833 1356.02 763.485 C 1357.61 749.753 1359.53 739.222 1371.48 730.002 C 1375.95 726.6 1380.84 723.785 1386.02 721.624 L 1389.4 720.203 L 1388.72 719.229 L 1381.24 718.272 C 1349.65 711.548 1318.15 704.368 1286.76 696.732 C 1259.92 690.314 1236.74 683.213 1209.03 681.752 C 1165.45 679.453 1125.27 693.691 1084.12 706.344 C 1019.86 726.103 957.162 742.653 889.597 745.579 C 896.884 755.78 902.044 763.35 905.811 775.419 C 917.576 813.113 889.522 829.765 855.065 822.435 C 814.184 813.738 776.579 786.181 753.211 752.052 C 751.768 749.939 750.345 747.813 748.942 745.673 C 676.26 738.463 598.121 720.893 534.815 682.38 C 526.146 677.106 510.443 667.825 511.308 656.009 C 512.185 647.394 524.75 641.18 530.222 635.141 z"/><path class="mp" d="M 1122.8 592.382 C 1146.84 589.403 1179.48 598.784 1195.24 617.94 C 1197.77 621.01 1199.56 624.292 1199.07 628.373 C 1185.6 649.014 1106.22 596.219 1073.91 702.453 C 1044.02 713.77 984.329 727.335 953.256 732.629 C 943.272 734.172 885.519 742.43 880.853 737.106 C 885.653 733.512 901.352 733.091 907.891 732.13 C 947.085 726.989 992.574 711.523 1016.15 677.174 C 1046.47 633.011 1064.62 599.141 1122.8 592.382 z"/><path class="mp" d="M 628.684 659.347 C 640.987 658.328 653.372 659.584 665.22 663.053 C 705.39 674.611 725.305 704.266 744.13 738.488 C 713.898 736.44 682.912 730.481 653.624 722.79 C 611.849 713.306 555.95 692.171 521.883 665.967 C 544.41 670.37 567.553 670.615 590.168 666.689 C 603.215 664.321 615.418 661.071 628.684 659.347 z"/><path class="mp" d="M 673.609 592.332 C 688.496 590.591 727.88 593.764 731.145 611.841 C 731.61 614.497 730.946 617.227 729.313 619.373 C 722.025 629.137 696.682 631.684 685.25 632.97 C 671.638 633.313 639.016 633.73 628.375 625.331 C 604.641 606.598 663.382 593.672 673.609 592.332 z"/><path class="mp" d="M 1000.24 517.382 C 1012.8 516.143 1088.04 516.808 1090.37 530.577 C 1086.77 533.547 1063.74 543.889 1054.84 549.837 C 1046.32 555.602 1028.51 575.187 1020.13 573.243 C 1020.44 573.58 1012.59 552.22 1011.64 549.025 C 1008.31 537.816 981.917 527.501 987.179 520.158 C 990.9 517.859 995.811 517.806 1000.24 517.382 z"/></symbol></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="orca-mark" viewBox="486 320 1075 534"><path class="mb" d="M 530.222 635.141 C 547.203 567.457 589.076 570.125 647.27 554.305 C 697.307 540.771 747.587 530.682 798.465 521.12 C 815.886 517.846 859.211 515.142 871.9 505.796 C 907.603 479.502 915.137 417.991 939.705 383.278 C 952.237 365.572 964.796 344.166 986.058 346.148 C 996.913 347.159 989.92 379.52 990.394 386.557 C 988.222 418.954 985.806 488.778 1022 504.984 C 1032.87 509.856 1079.54 515.003 1095.41 518.389 C 1199.45 540.447 1300.37 582.269 1377.31 657.622 C 1387.91 668.013 1418.34 705.131 1426.12 708.705 C 1467.05 727.512 1516.78 722.951 1537.92 775.437 C 1500.56 750.272 1476.63 750.853 1433.03 746.769 C 1430.03 750.883 1433.29 752.347 1430.36 753.613 C 1414.94 742.903 1400.89 742.279 1382.71 744.836 C 1368.94 746.772 1363.15 752.833 1356.02 763.485 C 1357.61 749.753 1359.53 739.222 1371.48 730.002 C 1375.95 726.6 1380.84 723.785 1386.02 721.624 L 1389.4 720.203 L 1388.72 719.229 L 1381.24 718.272 C 1349.65 711.548 1318.15 704.368 1286.76 696.732 C 1259.92 690.314 1236.74 683.213 1209.03 681.752 C 1165.45 679.453 1125.27 693.691 1084.12 706.344 C 1019.86 726.103 957.162 742.653 889.597 745.579 C 896.884 755.78 902.044 763.35 905.811 775.419 C 917.576 813.113 889.522 829.765 855.065 822.435 C 814.184 813.738 776.579 786.181 753.211 752.052 C 751.768 749.939 750.345 747.813 748.942 745.673 C 676.26 738.463 598.121 720.893 534.815 682.38 C 526.146 677.106 510.443 667.825 511.308 656.009 C 512.185 647.394 524.75 641.18 530.222 635.141 z"/><path class="mp" d="M 1122.8 592.382 C 1146.84 589.403 1179.48 598.784 1195.24 617.94 C 1197.77 621.01 1199.56 624.292 1199.07 628.373 C 1185.6 649.014 1106.22 596.219 1073.91 702.453 C 1044.02 713.77 984.329 727.335 953.256 732.629 C 943.272 734.172 885.519 742.43 880.853 737.106 C 885.653 733.512 901.352 733.091 907.891 732.13 C 947.085 726.989 992.574 711.523 1016.15 677.174 C 1046.47 633.011 1064.62 599.141 1122.8 592.382 z"/><path class="mp" d="M 628.684 659.347 C 640.987 658.328 653.372 659.584 665.22 663.053 C 705.39 674.611 725.305 704.266 744.13 738.488 C 713.898 736.44 682.912 730.481 653.624 722.79 C 611.849 713.306 555.95 692.171 521.883 665.967 C 544.41 670.37 567.553 670.615 590.168 666.689 C 603.215 664.321 615.418 661.071 628.684 659.347 z"/><path class="mp" d="M 673.609 592.332 C 688.496 590.591 727.88 593.764 731.145 611.841 C 731.61 614.497 730.946 617.227 729.313 619.373 C 722.025 629.137 696.682 631.684 685.25 632.97 C 671.638 633.313 639.016 633.73 628.375 625.331 C 604.641 606.598 663.382 593.672 673.609 592.332 z"/><path class="mp" d="M 1000.24 517.382 C 1012.8 516.143 1088.04 516.808 1090.37 530.577 C 1086.77 533.547 1063.74 543.889 1054.84 549.837 C 1046.32 555.602 1028.51 575.187 1020.13 573.243 C 1020.44 573.58 1012.59 552.22 1011.64 549.025 C 1008.31 537.816 981.917 527.501 987.179 520.158 C 990.9 517.859 995.811 517.806 1000.24 517.382 z"/></symbol><symbol id="gh" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol></svg>
 <div id="progress" aria-hidden="true"></div>
 <nav class="rail" aria-label="Sections"><ol><span class="fill"></span>
   <li><a href="#problem"><span class="n">1</span>The problem</a></li>
@@ -375,7 +385,6 @@
 <div class="page"><div class="col">
 
 <header class="paper">
-  <svg class="mark-top" role="img" aria-label="ORCA"><use href="#orca-mark"/></svg>
   <h1>ORCA</h1>
   <p class="subtitle">Building a fast, independent platform on a system you do not own</p>
   <div class="authors">
@@ -383,21 +392,15 @@
       <svg viewBox="0 0 256 256" aria-label="ORCID iD" role="img"><circle cx="128" cy="128" r="128" fill="#a6ce39"/><path fill="#fff" d="M86.3 186.2H70.9V79.1h15.4v107.1zM108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7C191.7 111.2 178 93 148 93h-23.7v79.4zM88.7 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.6 10.1 10.1z"/></svg>
     </a>
   </div>
-  <p class="meta"><span>October 2026</span><span>Version 0.9</span><span><a href="#cite">Cite</a></span></p>
+  <p class="meta"><span>October 2026</span><span>Version 0.9</span><span><a class="ic" href="https://github.com/nathannncurtis/orca"><svg class="i" aria-hidden="true"><use href="#gh"/></svg>Source</a></span><span><a href="#cite">Cite</a></span></p>
 </header>
 
 <div class="abstract">
   <h2>Abstract</h2>
   <p>Many organizations run their core business on a vendor's system: a database they can read, whose schema, release cycle and API belong to someone else. Everything else grows around it. Tools query it directly, keep private copies that drift, and carry the vendor's quirks into every one of them.</p>
-  <p>This paper describes ORCA, an architectural pattern for that situation: own a translated, live copy for reads, and send every write back through the vendor. ORCA is assembled from known ideas. What it adds is how they are held together when the source is someone else's, and an exact account of which guarantees survive. It closes with what one implementation learned in production.</p>
+  <p>This paper describes ORCA <span class="xp">(<b>O</b>perational store, <b>R</b>ead models, <b>C</b>hange capture, <b>A</b>nti-corruption layer)</span>, an architectural pattern for that situation: own a translated, live copy for reads, and send every write back through the vendor. ORCA is assembled from known ideas. What it adds is how they are held together when the source is someone else's, and an exact account of which guarantees survive. It closes with what one implementation learned in production.</p>
 </div>
 
-<div class="cover" aria-label="The four parts">
-  <a href="#store"><span class="L">O</span><span class="t">Operational store</span><span class="d">Your own full copy of the vendor's data, kept current.</span></a>
-  <a href="#read-models"><span class="L">R</span><span class="t">Read models</span><span class="d">Screen-shaped documents built by the translation layer.</span></a>
-  <a href="#capture"><span class="L">C</span><span class="t">Change capture</span><span class="d">A best-effort signal of which records changed.</span></a>
-  <a href="#acl"><span class="L">A</span><span class="t">Anti-corruption layer</span><span class="d">A library that turns the vendor's model into yours.</span></a>
-</div>
 
 <nav class="contents" aria-label="Contents">
   <h2>Contents</h2>
@@ -416,7 +419,7 @@
     <li><span class="n">6</span><a href="#failures">Failure cases</a></li>
     <li><span class="n">7</span><a href="#example">A worked example</a></li>
     <li><span class="n">8</span><a href="#related">Related patterns</a></li>
-    <li><span class="n">9</span><a href="#fits">When ORCA fits</a></li>
+    <li><span class="n">9</span><a href="#fits">When ORCA fits, and its limits</a></li>
     <li><span class="n">10</span><a href="#practice">In practice</a></li>
     <li><span class="n">11</span><a href="#conclusion">Conclusion</a></li>
   </ol>
@@ -424,18 +427,25 @@
 
 <section id="problem">
   <h2 class="sec"><span class="num">1</span>The problem</h2>
-  <p class="reveal">Many organizations run their core business on a vendor's system: a practice-management, ERP or line-of-business product whose database you can read but whose schema, release cycle and API belong to someone else. Over the years everything else grows around it.</p>
+  <p class="reveal">The source here is a vendor's database: a practice-management, ERP or line-of-business product the business runs on. You can read it; its schema, release cycle and API belong to someone else. Everything built after it grows around it.</p>
   <ul class="items reveal stagger">
-    <li><b>Direct reads.</b> Dozens of internal tools query the vendor's database directly, each with its own polling loop.</li>
-    <li><b>Private copies.</b> Each tool keeps its own partial copy, drifting slightly differently.</li>
+    <li><b>Direct reads.</b> Dozens of internal tools query the vendor's database, each with its own polling loop.</li>
+    <li><b>Private copies.</b> Each tool keeps its own partial copy; each drifts a little differently.</li>
     <li><b>Leaking quirks.</b> The vendor's model (packed flag bytes, coded columns that need lookups, one table doing several jobs) leaks into every one of them.</li>
-    <li><b>Slow, incomplete API.</b> It is too slow and too incomplete to build on, and changing it is not an option.</li>
+    <li><b>A slow, incomplete API.</b> Too slow and too incomplete to build on, and changing it isn't an option.</li>
   </ul>
+  <p class="reveal">This paper makes three contributions:</p>
+  <ol class="contrib reveal stagger">
+    <li>A way to keep a translated, live copy of a system you can read but not change, built on capture treated as a hint rather than a fact (3.1, 3.2).</li>
+    <li>A write path through the vendor's API that never resends blind, and reports one of three outcomes instead of claiming exactly-once delivery (4.3).</li>
+    <li>An exact statement of what survives: the invariants each part keeps, and the guarantees and non-guarantees of the whole (5).</li>
+  </ol>
+  <p class="reveal">It closes with what one implementation learned in production (10).</p>
 </section>
 
 <section id="answers">
   <h2 class="sec"><span class="num">2</span>Why the usual answers fail</h2>
-  <p class="reveal">Four answers come up first. None of them fits.</p>
+  <p class="reveal">Four answers come up first; none of them fits.</p>
   <div class="table wide reveal">
     <p class="cap"><b>Table 1.</b> The usual answers, against what a platform on someone else's system needs.</p>
     <table class="score">
@@ -450,7 +460,7 @@
     </table>
     <p class="legend"><span><span class="mk y" aria-label="yes">&#10003;</span> Met</span><span><span class="mk n" aria-label="no">&#10005;</span> Why it fails</span><span><span class="mk z" aria-label="not the issue">&middot;</span> Not the deciding issue</span></p>
   </div>
-  <p class="reveal">ORCA is the shape that remains: own a translated, live copy for reads, and send every write back through the vendor. It is not a stack. Any language, database or message bus can implement it.</p>
+  <p class="reveal">ORCA is the shape that remains: own a translated, live copy for reads, and send every write back through the vendor. It isn't a stack. Any language, database or message bus can implement it.</p>
 </section>
 
 <section id="pattern">
@@ -461,8 +471,6 @@
   <defs>
     <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahf"/></marker>
     <marker id="ahw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahw"/></marker>
-    <path id="flow-r" d="M215,310 C215,200 290,195 370,195 L485,195 L485,495 L740,495 L740,350 L960,350"/>
-    <path id="flow-w" d="M1057,420 C1057,560 900,650 730,650 L600,650 L470,650 L240,625 L140,600 L140,400"/>
   </defs>
   <g class="zones">
     <rect x="20" y="80" width="290" height="640" rx="14"/><rect x="330" y="80" width="560" height="640" rx="14"/><rect x="910" y="80" width="270" height="640" rx="14"/>
@@ -471,8 +479,6 @@
   </g>
   <text class="lb fb" x="598" y="-34" text-anchor="middle">fallback when the platform is down: one record, same library, marked live</text>
   <g class="edges"><path class="e " d="M215,310 C215,200 290,195 370,195" style="--i:0" pathLength="1" marker-end="url(#ah)"/><path class="e " d="M485,230 L485,310" style="--i:1" pathLength="1" marker-end="url(#ah)"/><path class="e " d="M370,337 L240,337" style="--i:2" pathLength="1" marker-end="url(#ah)"/><path class="e dash" d="M370,377 L240,377" style="--i:3" pathLength="1" marker-end="url(#ah)"/><path class="e " d="M485,390 L485,460" style="--i:4" pathLength="1" marker-end="url(#ah)"/><path class="e " d="M600,495 L640,495" style="--i:5" pathLength="1" marker-end="url(#ah)"/><path class="e " d="M740,460 L740,390" style="--i:6" pathLength="1" marker-end="url(#ah)"/><path class="e " d="M840,350 L960,350" style="--i:7" pathLength="1" marker-end="url(#ah)"/><path class="e w" d="M1057,420 C1057,560 900,650 730,650" style="--i:8" pathLength="1" marker-end="url(#ahw)"/><path class="e w" d="M470,650 L240,625" style="--i:9" pathLength="1" marker-end="url(#ahw)"/><path class="e w" d="M140,580 L140,400" style="--i:10" pathLength="1" marker-end="url(#ahw)"/><path class="e dash" d="M1057,300 C1057,-110 100,-110 100,310" style="--i:11" pathLength="1" marker-end="url(#ah)"/></g>
-  <g class="dots"><circle class="dot r" r="5"><animateMotion dur="6s" begin="indefinite" repeatCount="indefinite" rotate="auto"><mpath href="#flow-r"/></animateMotion></circle>
-  <circle class="dot w" r="5"><animateMotion dur="7.5s" begin="indefinite" repeatCount="indefinite"><mpath href="#flow-w"/></animateMotion></circle></g>
   <g class="nodes"><g class="nd" style="--i:0"><rect x="40" y="310" width="200" height="90" rx="10"/><text class="t" x="140.0" y="360.0">Source database</text></g><g class="nd" style="--i:1"><rect x="40" y="580" width="200" height="80" rx="10"/><text class="t" x="140.0" y="625.0">Vendor API</text></g><g class="nd" style="--i:2"><rect x="370" y="160" width="230" height="70" rx="10"/><text class="t" x="485.0" y="191.0">Change capture</text><text class="s" x="485.0" y="207.0">hints: table + keys</text></g><g class="nd" style="--i:3"><rect x="370" y="310" width="230" height="80" rx="10"/><text class="t" x="485.0" y="346.0">Operational store</text><text class="s" x="485.0" y="362.0">raw copy of every table</text></g><g class="nd" style="--i:4"><rect x="370" y="460" width="230" height="70" rx="10"/><text class="t" x="485.0" y="491.0">Anti-corruption layer</text><text class="s" x="485.0" y="507.0">translation library, no I/O</text></g><g class="nd" style="--i:5"><rect x="640" y="460" width="200" height="70" rx="10"/><text class="t" x="740.0" y="491.0">Read models</text><text class="s" x="740.0" y="507.0">versioned, with outbox</text></g><g class="nd" style="--i:6"><rect x="640" y="310" width="200" height="80" rx="10"/><text class="t" x="740.0" y="346.0">Delivery</text><text class="s" x="740.0" y="362.0">fan-out, delivery only</text></g><g class="nd" style="--i:7"><rect x="470" y="615" width="260" height="70" rx="10"/><text class="t" x="600.0" y="646.0">Write queue + leases</text><text class="s" x="600.0" y="662.0">one claimer, never resend blind</text></g><g class="nd" style="--i:8"><rect x="960" y="300" width="195" height="120" rx="10"/><text class="t" x="1057.5" y="350.0">Client app</text><text class="s" x="1057.5" y="372.0">local cache</text><text class="s" x="1057.5" y="388.0">+ intent log</text></g></g>
   <g class="labels"><text class="lb" x="300" y="184" text-anchor="middle">trace of writes</text><text class="lb" x="497" y="266">hint stream</text><text class="lb" x="497" y="282">resumable, gaps flagged</text><text class="lb" x="305" y="327" text-anchor="middle">re-read by key,</text><text class="lb" x="305" y="356" text-anchor="middle">committed only</text><text class="lb" x="305" y="397" text-anchor="middle">checksum sweeps</text><text class="lb" x="900" y="340" text-anchor="middle">whole versions,</text><text class="lb" x="900" y="372" text-anchor="middle">commit order</text><text class="lb" x="1066" y="548">intents</text><text class="lb" x="355" y="664" text-anchor="middle">send through the API</text><text class="lb" x="150" y="495">applies the write</text></g>
 </svg></div>
@@ -480,89 +486,235 @@
   </figure>
 
   <h3 class="sub" id="capture"><span class="num">3.1</span>Change capture</h3>
-  <p class="def reveal">A low-latency, best-effort signal of which records changed, taken from outside the vendor's schema. Examples are a database trace session, a transaction-log reader, or network capture of the vendor's client traffic.</p>
+  <p class="def reveal">A low-latency, best-effort signal of which records changed, taken from outside the vendor's schema.</p>
+  <aside class="fork reveal"><span class="k">The obvious choice</span>Turn on the database's own change tracking.<span class="k">Why ORCA doesn't</span>It alters a schema you don't own.</aside>
+  <p class="reveal">Capture tells the store where to look; nothing more. It's taken from outside the vendor's schema: a database trace session, a transaction-log reader, or network capture of the vendor's client traffic. Nothing in the vendor's schema is added or changed to produce it.</p>
+  <p class="reveal">Capture is allowed to be wrong; it's never trusted for values. A record can arrive before its change commits, describe a change that rolls back, or not arrive at all. Everything downstream is built to survive.</p>
+
+  <dl class="terms reveal">
+    <dt>Capture record</dt><dd>A table and (typically) the primary keys it touched; no values are carried.</dd>
+    <dt>Position</dt><dd>A point in the stream a consumer can resume from.</dd>
+    <dt>Gap</dt><dd>A flag that records after a position may have been lost.</dd>
+  </dl>
+
+  <div class="inv reveal">
+    <p class="inv-h">Invariants</p>
+    <p><b>C1 Resumable.</b> A consumer reconnecting from a position receives the records after it, or a gap.</p>
+    <p><b>C2 Honest gaps.</b> If records may have been lost, the consumer is told; no gap means nothing was lost.</p>
+  </div>
+  <p class="reveal">These are the only guarantees capture gives. Reconciliation (3.2) covers what capture misses.</p>
+
+  <h4 class="subsub">What a record says</h4>
   <aside class="fork reveal"><span class="k">The obvious choice</span>Trust capture, as a change data capture pipeline usually does.<span class="k">Why ORCA doesn't</span>Capture taken from outside the schema is best-effort. Truth comes from a committed-only re-read.</aside>
+  <p class="reveal">A record names where a change happened; the store decides what to do with it. There are three shapes, with one response each:</p>
   <ul class="items reveal stagger">
-    <li><b>Hints, not facts.</b> A capture record says "look at this table, these keys". It never says what the new values are. It may arrive before the change commits, may describe a change that later rolls back, and may be missing entirely.</li>
-    <li><b>Resumable, with gaps marked.</b> The stream has a position. A consumer reconnects from its last position and is told explicitly when records may have been lost (a gap).</li>
+    <li><b>A table and keys.</b> Re-read those rows (3.2).</li>
+    <li><b>A table only.</b> Reconcile the table.</li>
+    <li><b>Nothing, or a gap.</b> Reconcile everything the gap could cover.</li>
   </ul>
+  <p class="reveal">Records naming tables the store doesn't copy (temporary tables and the like) are skipped.</p>
+<pre class="algo reveal"><span class="kw">loop</span>:
+    batch, gap ← capture.read_after(position)
+    <span class="kw">if</span> gap: request reconcile(all)
+    <span class="kw">for</span> record <span class="kw">in</span> batch:
+        <span class="kw">if</span> record.keys:  reread(record.table, record.keys)
+        <span class="kw">elif</span> record.table: request reconcile(record.table)
+    position ← batch.last</pre>
+
+  <h4 class="subsub">Where it's taken from</h4>
+  <p class="reveal">The database server is the one place every writer passes through. A trace session there sees the vendor's desktop clients, its API, its web portal and its scheduled jobs alike; capture taken from the API or from client traffic only sees the writers that use it.</p>
+  <p class="reveal">The capturing service runs next to the database, writes to bounded rolling files, and serves records over a long poll with a resume position. A consumer that falls behind the files' retention gets a gap rather than a silent hole.</p>
+
+  <p class="reveal measure">In the implementation in section 10, <mark>[share]</mark> of changes were first seen by reconciliation rather than capture. Capture to hint took <mark>[p50]</mark> at the median.</p>
 
   <h3 class="sub" id="store"><span class="num">3.2</span>Operational store</h3>
-  <p class="def reveal">Your own full copy of the vendor's data, kept current.</p>
-  <ul class="items reveal stagger">
-    <li><b>First copy.</b> Resumable and paced, in key order, so the vendor's system never feels it.</li>
-    <li><b>Re-read on every hint.</b> The touched rows are re-read from the source by primary key, with a read that only sees committed data. A rolled-back change re-reads as the original. The hint only decides where to look; the source decides what is true.</li>
-  </ul>
-  <blockquote class="pull reveal">The hint only decides where to look; the source decides what is true.<cite>3.2 Operational store</cite></blockquote>
-  <aside class="fork reveal"><span class="k">The obvious choice</span>Trust the stream to keep the copy right.<span class="k">Why ORCA doesn't</span>Capture misses changes, such as trigger writes and unparsable statements. Only a comparison against the source finds them.</aside>
-  <ul class="items reveal stagger">
-    <li><b>Reconciliation.</b> Checksums compared by key range, re-copying only ranges that differ. It runs after every gap, as soon as each table's first copy finishes, and on a slow schedule. Reconciliation always wins over the copy and over the stream.</li>
-    <li><b>A raw layer.</b> The vendor's tables kept exactly as they are, so translations can be rebuilt without touching the vendor again.</li>
-  </ul>
+  <p class="def reveal">Your own current and full copy of the vendor's data.</p>
+  <p class="reveal">A copy of every vendor database table. Anything downstream reads from it; it converges on what the source has committed without needing any trust in what the capture is. Its four parts are: a paced first copy, a re-read on hint, reconciliation by key range, and a raw layer.</p>
+
+  <dl class="terms reveal">
+    <dt>Hint</dt><dd>A capture record naming a table and (typically) primary keys; no values are carried.</dd>
+    <dt>Committed-only read</dt><dd>A read that sees only committed data; it waits on uncommitted writes rather than reading them through.</dd>
+    <dt>Range</dt><dd>A contiguous span of primary keys in one table.</dd>
+  </dl>
+
+  <div class="inv reveal">
+    <p class="inv-h">Invariants</p>
+    <p><b>S1 Convergence.</b> Every committed source row eventually appears in the store with its committed values.</p>
+    <p><b>S2 No rolled-back residue.</b> A rolled-back value does not survive past the next re-read or reconciliation of its row.</p>
+    <p><b>S3 Ordered application.</b> An older source read is never written over a newer one.</p>
+  </div>
+
+  <h4 class="subsub">First copy</h4>
+  <p class="reveal">Each table is copied in primary-key order, in paced chunks; a chunk's rows and its last key commit together, making a restart resume after the last chunk is written. A failing chunk is retried at half the size, down to one row; the size grows back after each success. Capture runs alongside the copy, and the copy never overwrites a row capture has already written. A table counts as correct only after its first reconciliation.</p>
+
+  <h4 class="subsub">Re-read on every hint</h4>
+  <p class="reveal">A hint names only rows; it never supplies values. The store re-reads the named rows by primary key, with a committed-only read, and replaces its copy with the result.</p>
+<pre class="algo reveal"><span class="kw">on</span> hint(table, keys):
+    <span class="kw">if</span> keys is empty:
+        request reconcile(table)
+        <span class="kw">return</span>
+    rows ← source.read_committed(table, keys)
+    <span class="kw">with</span> lock(table):
+        store.replace(table, keys, rows)</pre>
+  <p class="reveal">A hint that arrives before its transaction ends will wait; the read returns the new values if it commits and the original values if it rolls back (S2). The capture position is saved after each batch is applied; a restart reapplies the last batch, and re-reads are idempotent.</p>
+  <blockquote class="pull reveal">The hint only decides where to look; the source decides the truth.<cite>3.2 Operational store</cite></blockquote>
+
+  <aside class="fork reveal"><span class="k">The obvious choice</span>Trust the stream to keep the copy right.<span class="k">Why ORCA doesn't</span>Capture misses changes, such as trigger writes and unparsable statements. Only a comparison against the source is trustworthy.</aside>
+  <h4 class="subsub">Reconciliation</h4>
+  <p class="reveal">Both sides compute a row count and a checksum sum per range; only ranges that differ are re-copied, with a committed-only read.</p>
+<pre class="algo reveal">reconcile(table):
+    <span class="kw">for</span> range <span class="kw">in</span> key_ranges(table):
+        <span class="kw">if</span> summary(source, range) ≠ summary(store, range):
+            rows ← source.read_committed(table, range)
+            <span class="kw">with</span> lock(table):
+                store.replace_range(table, range, rows)</pre>
+  <p class="reveal">It runs after every gap, after each table's first copy, and on a slow schedule; it always beats the copy and the stream. A change capture missed lies in a range whose summary differs, up to checksum collisions; the next pass copies it (S1).</p>
+  <p class="reveal">A store row missing from a range is deleted only after a lookup by primary key confirms it's gone; two engines rarely order or compare text the same way, and a range boundary drawn by one can exclude a row in the other. A re-read and a reconciliation of the same table each hold a lock on it from source read to commit; an older read never lands after a newer one (S3). Large tables reconcile off-peak; small tables, and tables a hint named, at any time.</p>
+
+  <h4 class="subsub">The raw layer</h4>
+  <p class="reveal">The vendor's tables, kept exactly with a checksum per row. Nothing downstream reads them; they let the translation layer (3.3) and the read models be rebuilt without touching the vendor. A table schema that changes is copied again.</p>
+
+  <p class="reveal measure">In the implementation in section 10, <mark>[share of passes]</mark> of reconciliation passes found a range capture had missed. Capture to rebuilt read model took <mark>[p50]</mark> at the median and <mark>[p95]</mark> at the 95th percentile.</p>
 
   <h3 class="sub" id="acl"><span class="num">3.3</span>Anti-corruption layer</h3>
-  <p class="def reveal">A translation library that turns the vendor's model into yours: decoding packed values, resolving codes, splitting tables that do several jobs, and joining what always belongs together.</p>
+  <p class="def reveal">A translation library that turns the vendor's model into yours.</p>
   <aside class="fork reveal"><span class="k">The obvious choice</span>Translate at the boundary, inside the service that reads the vendor.<span class="k">Why ORCA doesn't</span>Clients' fallback reads the source directly too. A library with no I/O, shared by both, gives the vendor's model one home.</aside>
+  <p class="reveal">The one place the vendor's model is understood. It takes rows and returns your shapes; it does no I/O. The store feeds it from the raw layer, and a client's fallback feeds it straight from the source (4.2). Both get the same answer.</p>
+
+  <dl class="terms reveal">
+    <dt>Shape</dt><dd>A document in your model, built from one entity's rows: an order header, a notes log, a list row.</dd>
+    <dt>Lookup</dt><dd>A small vendor table that resolves a code to what it means.</dd>
+  </dl>
+
+  <div class="inv reveal">
+    <p class="inv-h">Invariants</p>
+    <p><b>A1 One home.</b> Nothing outside the library reads the vendor's model.</p>
+    <p><b>A2 Pure.</b> A shape is a function of the rows it's given; the same rows always produce the same shape.</p>
+  </div>
+
+  <h4 class="subsub">What it translates</h4>
   <ul class="items reveal stagger">
-    <li><b>Source-agnostic.</b> It takes plain rows and returns your shapes, so it doesn't care whether the rows came from your store or straight from the vendor.</li>
-    <li><b>One copy of the vendor's quirks.</b> Everything else in the platform only sees your model.</li>
+    <li><b>Packed values.</b> Flag bytes and coded columns, decoded into named fields.</li>
+    <li><b>Codes.</b> Resolved through lookups.</li>
+    <li><b>Tables doing several jobs.</b> Split by job.</li>
+    <li><b>Rows that always belong together.</b> Joined into one shape.</li>
   </ul>
 
+  <h4 class="subsub">What it declares</h4>
+  <p class="reveal">Each shape lists the tables and columns it reads. That list decides which raw changes rebuild it (3.4) and what the fallback has to fetch.</p>
+<pre class="algo reveal">build(entity, source):
+    rows ← source.fetch(declared_tables, entity)   <span class="kw">#</span> store or vendor
+    <span class="kw">return</span> translate(rows, lookups)</pre>
+
+  <h4 class="subsub">Checked against the vendor</h4>
+  <p class="reveal">A translation that's wrong is wrong everywhere at once, so it's checked. Every night, random entities are built from the store and compared field by field with what the vendor's own application shows for them, read straight from the source. A difference is read again a moment later and counts only if it persists.</p>
+  <p class="reveal measure">In the implementation in section 10, <mark>[n]</mark> of <mark>[N]</mark> entities checked per night differed on average.</p>
+
   <h3 class="sub" id="read-models"><span class="num">3.4</span>Read models</h3>
-  <p class="def reveal">Screen-shaped documents built by the translation layer from the raw layer, such as an order header, a notes log or a list row.</p>
-  <ul class="items reveal stagger">
-    <li><b>Versioned in commit order.</b> Each change gets a version, and version order must equal commit order. A plain sequence is not enough, because sequence values are handed out before commit. A single counter row updated inside each shaping transaction serializes them.</li>
-    <li><b>Outbox.</b> Each shaping transaction also writes its changes to an outbox table: the durable record every delivery reads from.</li>
-    <li><b>Whole versions only.</b> One version can cover several read models. Delivery never splits a version, and a consumer applies a whole version and only then saves its position.</li>
-  </ul>
+  <p class="def reveal">Screen-shaped documents built by the translation layer from the raw layer.</p>
+  <p class="reveal">What clients actually read. They're versioned, so a consumer always knows what it has and what it's missing.</p>
+
+  <dl class="terms reveal">
+    <dt>Version</dt><dd>A number given to each committed change of read models; one version can cover several.</dd>
+    <dt>Outbox</dt><dd>The table recording each version's changes; the record every delivery reads from.</dd>
+    <dt>Dirty entity</dt><dd>An entity whose raw rows changed since its shapes were last built.</dd>
+  </dl>
+
+  <div class="inv reveal">
+    <p class="inv-h">Invariants</p>
+    <p><b>R1 Commit order.</b> Version order equals commit order.</p>
+    <p><b>R2 Whole versions.</b> A consumer never holds part of a version.</p>
+    <p><b>R3 No skips.</b> A consumer reading after version v never misses a committed version.</p>
+  </div>
+
+  <h4 class="subsub">Rebuilding</h4>
+  <p class="reveal">A re-read or reconciliation that changes a raw row a shape depends on marks its entity dirty, in the same transaction. The shaper rebuilds dirty entities. A shape that comes out identical isn't written and takes no version. A changed lookup rebuilds everything that uses it.</p>
+
+  <h4 class="subsub">Versioning</h4>
+  <p class="reveal">A plain sequence isn't enough; sequence values are handed out before commit, so a later commit can carry an earlier number. Each shaping transaction takes a single counter row, increments it, and holds its lock until commit; versions commit in order (R1). The same transaction writes one outbox row per changed shape.</p>
+<pre class="algo reveal">rebuild(entity):
+    <span class="kw">begin</span>
+        v ← counter.increment()      <span class="kw">#</span> row lock held until commit
+        <span class="kw">for</span> doc <span class="kw">in</span> build(entity, store):
+            <span class="kw">if</span> doc ≠ stored(doc):
+                write(doc, v)
+                outbox.append(v, doc)
+    <span class="kw">commit</span></pre>
+
+  <h4 class="subsub">Reading</h4>
+  <p class="reveal">Consumers read the outbox by version, never by row, and a batch always ends on a version boundary. A consumer applies a whole version and only then saves it as its position (R2, R3). A shape that no longer exists keeps its row with an empty document, so its deletion is a change like any other.</p>
 </section>
 
 <section id="around">
   <h2 class="sec"><span class="num">4</span>Delivery, clients and writes</h2>
   <h3 class="sub" id="delivery"><span class="num">4.1</span>Delivery</h3>
-  <p class="reveal">A fan-out layer (a pub/sub cache, a websocket service) carries committed versions from the outbox to everyone listening. It is delivery only, never the record: anything it loses is recovered from the outbox by position.</p>
+  <p class="def reveal">A fan-out layer (a pub/sub cache, a websocket service) that carries committed versions from the outbox to everyone listening.</p>
+  <p class="reveal">It's delivery only, never the record. Anything it loses is recovered from the outbox by position; losing a message costs latency, never correctness. It never splits a version (R2).</p>
 
   <h3 class="sub" id="clients"><span class="num">4.2</span>Clients</h3>
-  <ul class="items reveal stagger">
-    <li><b>Local cache.</b> Clients can keep their own embedded copy of the read models they need (for example open records plus a recent window), fed by the delivery layer and resumed by version.</li>
-    <li><b>Fallback.</b> When the platform is unavailable, a client may run the same translation library directly against the source. That fallback must be narrow (the one record on screen, rate-limited, clearly marked as live) so an outage of your platform never becomes a flood of reads on the vendor's.</li>
-  </ul>
+  <p class="reveal">A client can keep its own embedded copy of the read models it needs (typically open records plus a recent window), fed by delivery and resumed by version. A client that reconnects after its position has expired resynchronizes rather than replaying.</p>
+  <h4 class="subsub">Fallback</h4>
+  <p class="reveal">When the platform is down, a client may run the same translation library straight against the source; A2 makes the answer the same. The fallback is narrow: the one record on screen, rate-limited, and clearly marked as live. An outage of the platform must never become a flood of reads on the vendor.</p>
 
   <h3 class="sub" id="writes"><span class="num">4.3</span>Writes</h3>
-  <p class="reveal">Nothing writes to the vendor's database directly. Every write goes through the vendor's own API.</p>
+  <p class="def reveal">Nothing writes to the vendor's database directly; every write goes through the vendor's own API.</p>
   <aside class="fork reveal"><span class="k">The obvious choice</span>Write to your own store, as CQRS assumes you own the write side.<span class="k">Why ORCA doesn't</span>You don't. Writes go through the vendor's API and are judged by what comes back.</aside>
-  <ul class="items reveal stagger">
-    <li><b>Intents first.</b> A client records the user's intent in a durable local log, shows it at once, and can offer a short undo window.</li>
-    <li><b>One claimer per intent.</b> A queue (e.g. <code>FOR UPDATE SKIP LOCKED</code>) ensures each intent has one claimer, in order per record. That is not exactly-once delivery: a worker can send and then crash before recording it.</li>
-  </ul>
+  <dl class="terms reveal">
+    <dt>Intent</dt><dd>A change the user asked for, recorded locally before it's sent.</dd>
+    <dt>Claim</dt><dd>One worker's exclusive ownership of an intent.</dd>
+    <dt>Outcome</dt><dd>The judgment on a sent intent: confirmed, state reached or undetermined.</dd>
+  </dl>
+  <div class="inv reveal">
+    <p class="inv-h">Invariants</p>
+    <p><b>W1 One claimer.</b> Each intent has at most one claimer at a time, in order per record.</p>
+    <p><b>W2 Never resend blind.</b> An intent whose send is uncertain is resolved by observation, not by sending again.</p>
+    <p><b>W3 Evidence before done.</b> A write is reported done only with evidence; a write with side effects only when confirmed.</p>
+  </div>
+
+  <h4 class="subsub">Intents</h4>
+  <p class="reveal">A client records the user's intent in a durable local log and shows it at once; a short undo window is optional. A queue (e.g. <code>FOR UPDATE SKIP LOCKED</code>) gives each intent one claimer, in order per record (W1). That isn't exactly-once delivery. A worker can send and then crash before recording it.</p>
   <aside class="fork reveal"><span class="k">The obvious choice</span>Aim for exactly-once delivery, with idempotent retries.<span class="k">Why ORCA doesn't</span>A worker can send and then crash before recording it. ORCA replaces that with honesty: one claimer, never resend blind, and three outcomes.</aside>
+
+  <h4 class="subsub">Outcomes</h4>
+  <p class="reveal">A write is judged by what comes back through capture, not by the API's response alone.</p>
   <ul class="items reveal stagger">
-    <li><b>Never resend blind.</b> An uncertain outcome is resolved by observation, never by sending again.</li>
-    <li><b>Judged by what comes back.</b> A write is judged by what returns through change capture, with three outcomes. <span class="chip ok">Confirmed</span> tied to this operation; for a create, the API returns the new record's ID and that exact record arrives. <span class="chip mid">State reached</span> the record holds the values sent, after the intent was sent, but nothing proves this request caused it; enough for plain "set this field" changes. <span class="chip no">Undetermined</span> the evidence cannot tell; never retried automatically, shown to the person. Anything with side effects (creating records, sending, billing) only counts when Confirmed.</li>
-    <li><b>Leases with fencing tokens coordinate your own writers.</b> They are checked when an intent is queued and again before it is sent. They cannot recall a request already in flight, and they mean nothing to people working directly in the vendor's application. Conflicts with those people are detected afterwards through capture, not prevented. The vendor's own record locks, if visible, are mirrored in as a warning.</li>
+    <li><span class="chip ok">Confirmed</span> Tied to this operation; for a create, the API returns the new record's ID and that exact record arrives.</li>
+    <li><span class="chip mid">State reached</span> The record holds the values sent, after the intent was sent, but nothing proves this request caused it. Enough for plain "set this field" changes.</li>
+    <li><span class="chip no">Undetermined</span> The evidence can't tell. Never retried automatically; shown to the person.</li>
   </ul>
+<pre class="algo reveal">judge(intent, observed):
+    <span class="kw">if</span> intent.created_id <span class="kw">and</span> observed.id = intent.created_id:
+        <span class="kw">return</span> confirmed
+    <span class="kw">if</span> observed holds intent.values <span class="kw">and</span> observed.changed_after(intent.sent_at):
+        <span class="kw">return</span> state_reached
+    <span class="kw">return</span> undetermined</pre>
+  <p class="reveal">Anything with side effects (creating records, sending, billing) counts only when confirmed (W3).</p>
+
+  <h4 class="subsub">Leases</h4>
+  <p class="reveal">Leases with fencing tokens coordinate your own writers. They're checked when an intent is queued and again before it's sent. They can't recall a request already in flight, and they mean nothing to people working directly in the vendor's application; conflicts with those people are detected afterwards through capture, not prevented. The vendor's own record locks, if visible, are mirrored in as a warning.</p>
 </section>
 
 <section id="guarantees" class="band">
   <h2 class="sec"><span class="num">5</span>Guarantees</h2>
+  <p class="reveal">What the whole pattern promises, assembled from the invariants of its parts.</p>
   <div class="pair reveal stagger">
     <div>
       <h4>ORCA guarantees</h4>
       <ul class="items yes">
-        <li>Every committed source change eventually appears in the store (reconciliation).</li>
-        <li>The store never keeps a rolled-back value past the next re-read or reconciliation.</li>
-        <li>Version order equals commit order; no consumer skips a committed version.</li>
-        <li>A write is only reported done with evidence, and side-effecting writes only when Confirmed.</li>
-        <li>The vendor's model never leaks past the translation layer.</li>
+        <li>Every committed source change eventually appears in the store (S1).</li>
+        <li>The store never keeps a rolled-back value past the next re-read or reconciliation (S2).</li>
+        <li>Version order equals commit order, and no consumer skips a committed version (R1, R3).</li>
+        <li>A write is reported done only with evidence; a write with side effects only when confirmed (W3).</li>
+        <li>The vendor's model never leaks past the translation layer (A1).</li>
       </ul>
     </div>
     <div>
       <h4>ORCA does not guarantee</h4>
       <ul class="items no">
-        <li>That every change is seen through capture.</li>
+        <li>That every change is seen through capture; capture is a hint (3.1).</li>
         <li>That reads are as fresh as the source at every instant.</li>
-        <li>Exactly-once delivery of writes to the vendor.</li>
-        <li>That a write's cause can always be proved (Undetermined exists).</li>
+        <li>Exactly-once delivery of writes to the vendor (W2 replaces it).</li>
+        <li>That a write's cause can always be proved; undetermined exists.</li>
         <li>Coordination with people using the vendor's application directly.</li>
       </ul>
     </div>
@@ -571,20 +723,12 @@
 
 <section id="failures">
   <h2 class="sec"><span class="num">6</span>Failure cases</h2>
+  <p class="reveal">Each failure, what happens, and the invariant that holds through it.</p>
   <div class="table wide reveal">
     <p class="cap"><b>Table 2.</b> What happens when each part fails.</p>
     <table>
-      <thead><tr><th>Situation</th><th>What happens</th></tr></thead>
-      <tbody>
-        <tr><td>Capture misses a change (trigger writes, unparsable statements)</td><td>Reconciliation finds the differing range and re-copies it</td></tr>
-        <tr><td>Capture reports a gap</td><td>The consumer requests reconciliation of everything the gap could cover</td></tr>
-        <tr><td>A change rolls back after its hint</td><td>The committed-only re-read returns the original values</td></tr>
-        <tr><td>The first copy races a change</td><td>Each table counts as correct only after its first reconciliation</td></tr>
-        <tr><td>A worker crashes after sending a write</td><td>The intent is resolved by observation; it is never resent blind</td></tr>
-        <tr><td>A client reconnects after its position has expired</td><td>Full resync of its read models, not a replay</td></tr>
-        <tr><td>The platform is down</td><td>Clients fall back narrowly to the source, visibly</td></tr>
-        <tr><td>The vendor changes its schema</td><td>The raw layer shows it; translations are rebuilt from the raw layer</td></tr>
-      </tbody>
+      <thead><tr><th>Situation</th><th>What happens</th><th>Holds</th></tr></thead>
+      <tbody><tr><td>Capture misses a change (trigger writes, unparsable statements)</td><td>Reconciliation finds the differing range and re-copies it</td><td class="iv">S1</td></tr><tr><td>Capture reports a gap</td><td>The consumer requests reconciliation of everything the gap could cover</td><td class="iv">S1, C2</td></tr><tr><td>A change rolls back after its hint</td><td>The committed-only re-read returns the original values</td><td class="iv">S2</td></tr><tr><td>The first copy races a change</td><td>Each table counts as correct only after its first reconciliation</td><td class="iv">S1</td></tr><tr><td>A worker crashes after sending a write</td><td>The intent is resolved by observation; it is never resent blind</td><td class="iv">W2</td></tr><tr><td>A client reconnects after its position has expired</td><td>Full resync of its read models, not a replay</td><td class="iv">R3</td></tr><tr><td>The platform is down</td><td>Clients fall back narrowly to the source, visibly</td><td class="iv">A2</td></tr><tr><td>The vendor changes its schema</td><td>The raw layer shows it; the table is copied again and translations are rebuilt</td><td class="iv">S1, A1</td></tr></tbody>
     </table>
   </div>
 </section>
@@ -623,7 +767,11 @@
 
 <section id="related">
   <h2 class="sec"><span class="num">8</span>Related patterns</h2>
-  <p class="reveal">ORCA is assembled from known ideas. What it adds is how they are held together when the source is someone else's.</p>
+  <p class="reveal">ORCA is assembled from known ideas; what it adds is how they're held together when the source is someone else's.</p>
+  <p class="reveal">Change data capture tools (Debezium is the common example<sup class="ref"><a href="#ref-7">7</a></sup>) read the database's own log and treat what they read as the change. That needs access the vendor may not allow, and it trusts capture. ORCA needs neither: capture is a hint, and the source decides the truth.</p>
+  <p class="reveal">Domain-driven design's anti-corruption layer<sup class="ref"><a href="#ref-1">1</a></sup> translates an outside model at the boundary of a service. ORCA makes it a library with no I/O, shared by the store and the client fallback, so the vendor's model has exactly one home.</p>
+  <p class="reveal">CQRS<sup class="ref"><a href="#ref-2">2</a>,<a href="#ref-3">3</a></sup> separates read models from the write side but assumes you own the write side. ORCA's belongs to the vendor; writes go through its API and are judged by what comes back. The transactional outbox<sup class="ref"><a href="#ref-4">4</a></sup> records changes with the data that produced them; ORCA adds versions in commit order, delivered whole.</p>
+  <p class="reveal">Exactly-once processing<sup class="ref"><a href="#ref-6">6</a></sup> is replaced by honesty: one claimer, no blind resends, and three outcomes. Leases with fencing tokens<sup class="ref"><a href="#ref-5">5</a></sup> coordinate ORCA's own writers; they don't reach requests already in flight or people in the vendor's application.</p>
   <div class="table wide reveal">
     <p class="cap"><b>Table 3.</b> What ORCA takes from each pattern, and what it changes.</p>
     <table>
@@ -642,7 +790,7 @@
 </section>
 
 <section id="fits">
-  <h2 class="sec"><span class="num">9</span>When ORCA fits</h2>
+  <h2 class="sec"><span class="num">9</span>When ORCA fits, and its limits</h2>
   <div class="pair reveal stagger">
     <div>
       <h4>It fits when</h4>
@@ -663,30 +811,75 @@
       </ul>
     </div>
   </div>
+  <h4 class="subsub">Assumptions</h4>
+  <ul class="items reveal stagger">
+    <li>Every table has a primary key, or is small enough to reconcile whole.</li>
+    <li>The source supports a committed-only read.</li>
+    <li>Capture is right often enough to be useful; reconciliation bounds the cost of it being wrong, not the delay.</li>
+    <li>The vendor's API can make every write the platform needs.</li>
+  </ul>
+  <h4 class="subsub">Limits</h4>
+  <ul class="items reveal stagger">
+    <li>Freshness is bounded by capture's latency when it works, and by reconciliation's schedule when it doesn't.</li>
+    <li>A checksum collision can hide a difference until the row changes again.</li>
+    <li>Undetermined outcomes need a person.</li>
+    <li>Conflicts with people in the vendor's application are detected, not prevented.</li>
+  </ul>
 </section>
 
 <section id="practice" class="band">
   <h2 class="sec"><span class="num">10</span>In practice</h2>
-  <p class="reveal">One implementation, built against a vendor's practice-management system on SQL Server. Capture is an Extended Events session filtered to insert, update and delete, read by a small service next to the database. The store and read models are a Rust service with PostgreSQL. Delivery is Redis; clients keep LMDB caches. Any equivalent works: log-based capture such as Debezium, another database, Kafka for delivery, or SQLite on clients.</p>
-  <p class="reveal">Running it taught several things the pattern does not say.</p>
-  <ul class="items reveal stagger">
-    <li><b>Capture catches every writer.</b> Taken from the database server itself, it sees the vendor's desktop clients, its API, its web portal and its scheduled jobs alike.</li>
-    <li><b>A failing chunk is retried at half the size,</b> down to one row, growing back after each chunk that works. A table that keeps failing is set aside for a few minutes while the others go on.</li>
-    <li><b>Sweeps cost the source the most, so they wait for off-hours.</b> In working hours only small tables, and tables a capture record named, are swept. Nothing is dropped; the rest waits for the evening window.</li>
-    <li><b>A row is only deleted after a second lookup.</b> The two databases don't order or compare text in exactly the same way. A copy row missing from a range is deleted only once a lookup by its primary key confirms the source no longer has it.</li>
-    <li><b>An older read can never land after a newer one.</b> A re-read and a reconciliation of the same table each hold a lock on that table from their source read to their commit.</li>
-    <li><b>A schema change restarts the service.</b> Every few minutes it compares the source's tables, columns, types and keys. On a change it exits and is restarted, and any table whose shape changed is copied again from the start.</li>
-    <li><b>Not everything is worth copying.</b> One column of stored documents is left out of the copy and fetched from the vendor when someone opens one.</li>
-    <li><b>The translation is checked against the vendor every night.</b> Random records are built from the copy and compared with the results of the vendor application's own queries. A record that differs is read again a moment later, and counts only if it still differs.</li>
-    <li><b>Freshness is measured, not assumed.</b> For every change that reaches the read models, the time from capture to the commit of its rebuild is recorded, and the median and 95th percentile are logged every quarter hour.</li>
+  <p class="reveal">One implementation, against a vendor's practice-management system on SQL Server. It replaced direct reads from the office's tools; every app, dashboard and mobile tool reads from it, and almost every write goes through it. The stack is incidental. Any equivalent works: log-based capture such as Debezium, another database, Kafka for delivery, or SQLite on clients.</p>
+
+  <h4 class="subsub">Capture</h4>
+  <p class="reveal">An Extended Events session on the database server, filtered to insert, update and delete, writes to a few bounded rolling files. A small service on the same server reads them and serves records over HTTPS as a long poll: a consumer asks for everything after its position and waits up to 25 seconds. Each response carries the next position and a gap flag; a consumer that falls behind the files gets the flag. Because it's taken at the server, it sees every writer: the vendor's desktop clients, its API, its web portal and its scheduled jobs.</p>
+  <p class="reveal">A record names a table and the keys it has, or only an entity (an order), or nothing. An entity-only record re-reads that entity in every table keyed by it. A hint on a table whose key column isn't indexed is turned into a reconciliation of that table, so a hint never scans a large table.</p>
+
+  <h4 class="subsub">Store</h4>
+  <p class="reveal">A Rust service keeps every source table in PostgreSQL, in its own schema: the same table names, columns and primary keys, plus one row checksum column. Types map directly, with two losses worth knowing: <code>datetime2(7)</code> keeps six fractional digits, and a NUL inside a string is dropped. One column of stored documents, nearly 200 GB, isn't copied; it's fetched from the vendor when someone opens a document.</p>
+  <p class="reveal">Re-reads use <code>READCOMMITTEDLOCK</code>, so a rolled-back write is never copied. Range checksums are computed on both sides with dirty reads to keep them cheap. A summary that's wrong at worst copies a range for nothing or leaves it for the next pass; the copy itself is committed-only. A table whose key includes a <code>uniqueidentifier</code> is reconciled as one range, because the two engines order those differently. A table with no primary key is copied and checked whole.</p>
+  <p class="reveal">The source never sees more than three connections: one for capture, one for the first copy and reconciliation, and one for the nightly check. Every statement has a timeout. Every ten minutes the service compares the source's tables, columns, types and keys with what it copied; on a change it exits, a supervisor restarts it, and changed tables are copied again.</p>
+
+  <h4 class="subsub">Reconciliation</h4>
+  <p class="reveal">Requests are numbered from a sequence. A table is covered up to the number that was current when its pass began, so a request that arrives during a pass gets another one. Large tables wait for an evening window; a pass still running when the window closes stops between ranges and resumes there the next night. Tables due go oldest attempt first, so one that keeps failing can't hold up the rest.</p>
+
+  <h4 class="subsub">Read models and delivery</h4>
+  <p class="reveal">Shapes are built from the raw schema only, 500 entities at a time on a full build. Lookups are re-read every minute; a changed customer rebuilds that customer's entities, and any other changed lookup rebuilds everything. Redis on a separate host fans versions out and keeps a stream per audience. Desktop clients keep open records plus the last year in LMDB, with a fuzzy index for search, and resume over a websocket by version; when the platform is down they run the same translation crate against SQL Server.</p>
+
+  <h4 class="subsub">Writes</h4>
+  <p class="reveal">Each intent goes into an append-only, checksummed local log and shows on screen at once, with a five-second undo. A PostgreSQL queue claims intents with <code>FOR UPDATE SKIP LOCKED</code>. Leases take fencing tokens from a PostgreSQL sequence, and the vendor's own record locks are mirrored into the same leases. Mobile apps keep their own offline queue; the service that forwards their writes checks the record's lease first.</p>
+
+  <div class="table reveal">
+    <p class="cap"><b>Table 4.</b> Settings in this implementation.</p>
+    <table>
+      <thead><tr><th>Setting</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td>First-copy chunk</td><td>2,000 rows, 250 ms pause</td></tr>
+        <tr><td>Reconciliation range</td><td>20,000 rows</td></tr>
+        <tr><td>Statement timeout</td><td>60 s; 4 h for a whole-table read</td></tr>
+        <tr><td>Baseline reconciliation</td><td>every 24 h per table</td></tr>
+        <tr><td>Off-peak window</td><td>19:00 to 02:00</td></tr>
+        <tr><td>Reconciled at any hour</td><td>under 200,000 rows, or named by a hint</td></tr>
+        <tr><td>Schema check</td><td>every 10 min</td></tr>
+        <tr><td>Nightly check</td><td>200 random entities, re-checked after 30 s</td></tr>
+        <tr><td>Freshness logged</td><td>every 15 min, p50 and p95</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h4 class="subsub">Measured</h4>
+  <ul class="items reveal stagger measure">
+    <li>Tables copied: <mark>[n]</mark>; rows: <mark>[n]</mark>; first copy took <mark>[t]</mark>.</li>
+    <li>Capture to rebuilt read model: <mark>[p50]</mark> at the median, <mark>[p95]</mark> at the 95th percentile.</li>
+    <li>Reconciliation passes that found a range capture had missed: <mark>[share]</mark>.</li>
+    <li>Entities differing from the vendor in the nightly check: <mark>[n]</mark> of <mark>[N]</mark>.</li>
   </ul>
 </section>
 
 <section id="conclusion">
   <h2 class="sec"><span class="num">11</span>Conclusion</h2>
-  <p class="reveal">The combination is the point. A CDC pipeline usually assumes trustworthy capture and owned targets. CQRS usually assumes you own the write side. ORCA assumes neither, and says exactly which guarantees survive.</p>
-
-  <div class="endmark reveal" aria-hidden="true"><svg><use href="#orca-mark"/></svg></div>
+  <p class="reveal">ORCA treats the vendor's system as the truth and everything else as a signal. Capture says where to look; the source decides the truth. Reconciliation catches what capture misses, and writes go through the vendor and are judged by what comes back.</p>
+  <p class="reveal">The combination is the point. A CDC pipeline usually assumes trustworthy capture and owned targets; CQRS usually assumes you own the write side. ORCA assumes neither, and says exactly which guarantees survive.</p>
 </section>
 
 <section id="references">
@@ -698,6 +891,7 @@
     <li id="ref-4">Richardson, C. "Pattern: Transactional outbox." microservices.io.</li>
     <li id="ref-5">Kleppmann, M. "How to do distributed locking." martin.kleppmann.com, 2016.</li>
     <li id="ref-6">Kleppmann, M. <i>Designing Data-Intensive Applications.</i> O'Reilly, 2017.</li>
+    <li id="ref-7">Debezium. "Debezium documentation." debezium.io.</li>
   </ol>
 </section>
 
@@ -717,7 +911,8 @@
 
 <footer class="end">
   <p>The text and diagrams are licensed under Creative Commons Attribution 4.0. Use them, adapt them, build on them; credit Nathan Curtis and link back here.</p>
-  <p><a href="https://github.com/nathannncurtis/orca">Source on GitHub</a> &nbsp; <a href="https://nathancurtis.me">nathancurtis.me</a></p>
+  <p><a class="ic" href="https://github.com/nathannncurtis/orca"><svg class="i" aria-hidden="true"><use href="#gh"/></svg>Source on GitHub</a> &nbsp; <a href="https://nathancurtis.me">nathancurtis.me</a></p>
+  <div class="endmark reveal" aria-hidden="true"><svg><use href="#orca-mark"/></svg></div>
 </footer>
 
 </div></div>
@@ -753,14 +948,6 @@
     const ro = new IntersectionObserver(es => { es.forEach(e => vis.set(e.target.id, e.isIntersecting)); pick(); }, { rootMargin: '-35% 0px -55% 0px' });
     secs.forEach(s => ro.observe(s));
     new IntersectionObserver(([e]) => rail.classList.toggle('on', !e.isIntersecting && e.boundingClientRect.top < 0), {}).observe(document.querySelector('nav.contents'));
-  }
-
-  const ov = document.querySelector('.ovfig');
-  if (ov) {
-    const go = () => setTimeout(() => ov.querySelectorAll('animateMotion').forEach((a, i) => { try { a.beginElement(); } catch (e) {} }), 1800);
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { ov.querySelectorAll('.dot').forEach(d => d.remove()); }
-    else if (!('IntersectionObserver' in window)) go();
-    else new IntersectionObserver(([e], o) => { if (e.isIntersecting) { go(); o.disconnect(); } }, { threshold: .3 }).observe(ov);
   }
 </script>
 </body>
